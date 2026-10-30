@@ -2,9 +2,11 @@ import cn from 'classnames'
 import * as React from 'react'
 import { isCadFile } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
 import { IFileCompareMode } from 'stemn-shared/misc/FileCompare/types'
+import DxfDiffLoader from 'stemn-shared/misc/FileDiff/DxfDiffLoader'
 import FileDiffLoader from 'stemn-shared/misc/FileDiff/FileDiffLoader'
 import { IFile } from 'stemn-shared/misc/FileList/types'
 import { PreviewFile } from 'stemn-shared/misc/Files/PreviewFile'
+import { isDrawingFile } from 'stemn-shared/misc/Files/PreviewFile/PreviewCadOss/renderFormats'
 import classes from './FileCompareInner.module.scss'
 import FileCompareSlider from './FileCompareSlider/FileCompareSlider.jsx'
 
@@ -66,17 +68,14 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
   public render() {
     const { file1, file2, mode } = this.props
 
-    // two revisions of a CAD file: the diff viewer (lazy chunk), unified or side by side with synchronised cameras.
-    // it falls back to the plain side-by-side comparison below for formats the API cannot diff
+    // two revisions of a CAD file: the diff viewer (lazy chunk), unified or side by side with synchronised cameras;
+    // 2D drawings (DXF, DWG) in the 2D diff viewer, without three.js. both fall back to the plain side-by-side
+    // comparison below for formats the API cannot diff
     if (file1 && file2 && (mode === 'unified' || mode === 'sideBySide') && isCadFile(file1)) {
+      const DiffLoader = isDrawingFile(file1) ? DxfDiffLoader : FileDiffLoader
       return (
         <div className="layout-column flex">
-          <FileDiffLoader
-            file1={file1}
-            file2={file2}
-            view={mode}
-            renderFallback={() => this.renderCompare('sideBySide')}
-          />
+          <DiffLoader file1={file1} file2={file2} view={mode} renderFallback={() => this.renderCompare('sideBySide')} />
         </div>
       )
     }

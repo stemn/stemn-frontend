@@ -1,0 +1,77 @@
+@value primary, border1 from "theme";
+
+.canvas {
+  min-height: 0;
+  background: #fbfbfc;
+  overflow: hidden;
+
+  svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+  }
+
+  svg:active {
+    cursor: grabbing;
+  }
+
+  :global([data-entity-id]) {
+    cursor: pointer;
+  }
+
+  :global([data-diff-hovered='true']),
+  :global([data-diff-hovered='true']) * {
+    stroke-width: 2.5px;
+  }
+
+  :global([data-diff-selected='true']),
+  :global([data-diff-selected='true']) * {
+    stroke-width: 3px;
+  }
+
+  :global([data-diff-selected='true']) {
+    filter: drop-shadow(0 0 2px rgba(31, 35, 40, 0.65));
+  }
+}
+
+.layers {
+  position: relative;
+
+  summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+.layerList {
+  position: absolute;
+  z-index: 2;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  min-width: 180px;
+  max-height: 320px;
+  overflow: auto;
+  padding: 6px 8px;
+  background: white;
+  border: 1px solid border1;
+  border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 0;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+}

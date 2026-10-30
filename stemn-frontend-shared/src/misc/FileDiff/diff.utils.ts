@@ -188,8 +188,14 @@ const formatNumber = (value: number) => {
   return Math.abs(rounded) >= 1000 ? rounded.toLocaleString('en', { maximumFractionDigits: 1 }) : String(rounded)
 }
 
-/** Lengths in the scene's unit, shown in millimetres (CAD scenes are in metres) */
-export const formatLength = (value: number, unit = 'm') => `${formatNumber(unit === 'm' ? value * 1000 : value)} mm`
+/**
+ * Lengths in the scene's unit: metres and millimetres are shown in millimetres (CAD and IFC scenes are in metres, PCBs
+ * and most drawings in millimetres), any other unit (a drawing in inches, or without units) as it is
+ */
+export const formatLength = (value: number, unit = 'm') => {
+  if (unit === 'm' || unit === 'mm') return `${formatNumber(unit === 'm' ? value * 1000 : value)} mm`
+  return unit === 'unit' ? formatNumber(value) : `${formatNumber(value)} ${unit}`
+}
 
 const unitLabels: Record<string, string> = { mm3: 'mm³', mm2: 'mm²', mm: 'mm' }
 

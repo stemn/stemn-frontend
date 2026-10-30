@@ -29,8 +29,12 @@ export interface IPreviewCadOssProps {
   token?: string | null
   /** Called with the model and its nodes by stable id once it has loaded (the seam for a file-diff layer) */
   onSceneReady?: (scene: ICadSceneReady) => void
-  /** Rendered inside the viewer with the scene in CadSceneContext (e.g. a diff legend) */
+  /** Rendered inside the viewer with the scene in CadSceneContext (e.g. a diff legend, the IFC property panel) */
   children?: React.ReactNode
+  /** Called with the part picked in the part list (null when none is), for a panel about it */
+  onIsolate?: (id: string | null) => void
+  /** Nodes not to draw, by stable id (e.g. the products on other storeys of an IFC model) */
+  hiddenIds?: Set<string>
 }
 
 /** Fetches the glb with the user's token and prepares it (see prepareModel) */
@@ -58,6 +62,7 @@ interface ISceneProps {
   sectionFraction: number
   isolated: string | null
   fitRequest: number
+  hiddenIds?: Set<string>
 }
 
 /** Everything inside the canvas: lights, the model, orbit controls, fitting, and the material toggles */
@@ -70,6 +75,7 @@ const Scene = ({
   sectionFraction,
   isolated,
   fitRequest,
+  hiddenIds,
 }: ISceneProps) => {
   const { camera, gl, invalidate, get } = useThree()
   const controlsRef = React.useRef<OrbitControls | null>(null)
@@ -124,6 +130,13 @@ const Scene = ({
     invalidate()
   }, [model, nodesById, box, plane, wireframe, section, sectionAxis, sectionFraction, isolated, invalidate])
 
+  React.useEffect(() => {
+    nodesById.forEach((node, id) => {
+      node.visible = !(hiddenIds && hiddenIds.has(id))
+    })
+    invalidate()
+  }, [nodesById, hiddenIds, invalidate])
+
   return (
     <>
       <hemisphereLight args={[0xffffff, 0x8a8f99, 1.4]} />
@@ -134,7 +147,14 @@ const Scene = ({
   )
 }
 
-export const PreviewCadOss = ({ fileMeta, token, onSceneReady, children }: IPreviewCadOssProps) => {
+export const PreviewCadOss = ({
+  fileMeta,
+  token,
+  onSceneReady,
+  children,
+  onIsolate,
+  hiddenIds,
+}: IPreviewCadOssProps) => {
   const [loaded, setLoaded] = React.useState<{ url: string; model?: Object3D; error?: string } | null>(null)
   const [wireframe, setWireframe] = React.useState(false)
   const [section, setSection] = React.useState(false)
@@ -265,6 +285,7 @@ export const PreviewCadOss = ({ fileMeta, token, onSceneReady, children }: IPrev
                   sectionFraction={sectionFraction}
                   isolated={isolated}
                   fitRequest={fitRequest}
+                  hiddenIds={hiddenIds}
                 />
               </Canvas>
             ) : null}
@@ -281,7 +302,11 @@ export const PreviewCadOss = ({ fileMeta, token, onSceneReady, children }: IPrev
                 className={classes.part}
                 aria-pressed={isolated === part.id}
                 title={`${part.triangles.toLocaleString()} triangles`}
-                onClick={() => setIsolated(isolated === part.id ? null : part.id)}
+                onClick={() => {
+                  const next = isolated === part.id ? null : part.id
+                  setIsolated(next)
+                  if (onIsolate) onIsolate(next)
+                }}
                 data-testid="cad-part"
                 data-part-id={part.id}
               >

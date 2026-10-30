@@ -9,6 +9,7 @@ import {
   diffColours,
   diffUrl,
   formatDelta,
+  formatLength,
   formatValue,
   ghostOpacity,
   initialViewState,
@@ -191,4 +192,15 @@ it('builds the diff route url', () => {
 it('the fixture has one entity record per part of either revision', () => {
   const ids = manifest.entities.map((record: IDiffEntity) => record.id).sort()
   expect(ids).toEqual(['base-plate', 'bracket', 'nut', 'pin', 'spacer', 'washer'].map((id) => `bracket-assembly/${id}`))
+})
+
+describe('lengths in the scene unit', () => {
+  it('shows metres and millimetres in millimetres, other drawing units as they are', () => {
+    expect(formatLength(0.06)).toBe('60 mm')
+    expect(formatLength(500, 'mm')).toBe('500 mm')
+    expect(formatLength(12.5, 'in')).toBe('12.5 in')
+    expect(formatLength(3, 'unit')).toBe('3')
+    const door = { ...entity('spacer'), move: { translation: [500, 0, 0], distance: 500, rotation: 0 } }
+    expect(classSummary(door, 'mm')).toBe('Moved 500 mm')
+  })
 })

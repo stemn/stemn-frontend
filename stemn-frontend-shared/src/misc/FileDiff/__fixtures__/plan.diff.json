@@ -1,0 +1,201 @@
+{
+  "status": "complete",
+  "version": 1,
+  "adapter": {
+    "name": "dxf",
+    "version": 1
+  },
+  "fileId": "plan",
+  "revisionA": "a",
+  "revisionB": "b",
+  "units": {
+    "length": "mm",
+    "size": "mm",
+    "area": "mm2"
+  },
+  "counts": {
+    "unchanged": 3,
+    "added": 1,
+    "removed": 1,
+    "modified": 1,
+    "moved": 1
+  },
+  "entities": [
+    {
+      "id": "38",
+      "idA": "38",
+      "idB": "38",
+      "kind": "LWPOLYLINE",
+      "label": "Polyline 38",
+      "parentId": "layer:WALLS",
+      "class": "unchanged",
+      "match": {
+        "method": "id",
+        "confidence": 1
+      },
+      "changes": [],
+      "move": null,
+      "centreA": [5000, 4000, 0],
+      "centreB": [5000, 4000, 0],
+      "payloadRefA": {
+        "svg": "38"
+      },
+      "payloadRefB": {
+        "svg": "38"
+      }
+    },
+    {
+      "id": "39",
+      "idA": "39",
+      "idB": "39",
+      "kind": "LINE",
+      "label": "Line 39",
+      "parentId": "layer:WALLS",
+      "class": "unchanged",
+      "match": {
+        "method": "id",
+        "confidence": 1
+      },
+      "changes": [],
+      "move": null,
+      "centreA": [3000, 4000, 0],
+      "centreB": [3000, 4000, 0],
+      "payloadRefA": {
+        "svg": "39"
+      },
+      "payloadRefB": {
+        "svg": "39"
+      }
+    },
+    {
+      "id": "3A",
+      "idA": "3A",
+      "idB": "3A",
+      "kind": "INSERT",
+      "label": "DOOR-900",
+      "parentId": "layer:DOORS",
+      "class": "moved",
+      "match": {
+        "method": "id",
+        "confidence": 1
+      },
+      "changes": [],
+      "move": {
+        "translation": [500, 0, 0],
+        "distance": 500,
+        "rotation": 0
+      },
+      "centreA": [2450, 4450, 0],
+      "centreB": [2950, 4450, 0],
+      "payloadRefA": {
+        "svg": "3A"
+      },
+      "payloadRefB": {
+        "svg": "3A"
+      }
+    },
+    {
+      "id": "3C",
+      "idA": "3C",
+      "idB": "3C",
+      "kind": "LWPOLYLINE",
+      "label": "Polyline 3C",
+      "parentId": "layer:WALLS",
+      "class": "modified",
+      "match": {
+        "method": "id",
+        "confidence": 1
+      },
+      "changes": [
+        {
+          "attribute": "size",
+          "a": [600, 2000],
+          "b": [600, 2500],
+          "delta": [0, 500]
+        },
+        {
+          "attribute": "length",
+          "a": 2741.64,
+          "b": 3241.64,
+          "delta": 500
+        }
+      ],
+      "move": null,
+      "centreA": [10300, 6000, 0],
+      "centreB": [10300, 6250, 0],
+      "payloadRefA": {
+        "svg": "3C"
+      },
+      "payloadRefB": {
+        "svg": "3C"
+      }
+    },
+    {
+      "id": "3E",
+      "idA": "3E",
+      "idB": "3E",
+      "kind": "TEXT",
+      "label": "LIVING",
+      "parentId": "layer:FURNITURE",
+      "class": "unchanged",
+      "match": {
+        "method": "id",
+        "confidence": 1
+      },
+      "changes": [],
+      "move": null,
+      "centreA": [3450, 6125, 0],
+      "centreB": [3450, 6125, 0],
+      "payloadRefA": {
+        "svg": "3E"
+      },
+      "payloadRefB": {
+        "svg": "3E"
+      }
+    },
+    {
+      "id": "3F",
+      "idA": null,
+      "idB": "3F",
+      "kind": "LINE",
+      "label": "Line 3F",
+      "parentId": "layer:WALLS",
+      "class": "added",
+      "match": {
+        "method": null,
+        "confidence": 0
+      },
+      "changes": [],
+      "move": null,
+      "centreA": null,
+      "centreB": [6000, 6000, 0],
+      "payloadRefA": null,
+      "payloadRefB": {
+        "svg": "3F"
+      }
+    },
+    {
+      "id": "3D",
+      "idA": "3D",
+      "idB": null,
+      "kind": "CIRCLE",
+      "label": "Circle 3D",
+      "parentId": "layer:FURNITURE",
+      "class": "removed",
+      "match": {
+        "method": null,
+        "confidence": 0
+      },
+      "changes": [],
+      "move": null,
+      "centreA": [8000, 2000, 0],
+      "centreB": null,
+      "payloadRefA": {
+        "svg": "3D"
+      },
+      "payloadRefB": null
+    }
+  ],
+  "created": "2026-10-30T00:00:00.000Z",
+  "duration": 1
+}

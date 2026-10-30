@@ -2,15 +2,19 @@ import React from 'react'
 
 import { isWebGlSupported } from '../PreviewCad/PreviewCad.utils.js'
 import { isOpenCascadeRender } from '../PreviewCadOss/PreviewCadOss.utils'
+import { isDrawingFile, isIfcFile } from '../PreviewCadOss/renderFormats'
 import PreviewCadLoader from '../PreviewCadLoader'
 import PreviewCadOssLoader from '../PreviewCadOssLoader'
+import PreviewDrawingLoader from '../PreviewDrawingLoader'
+import PreviewIfcLoader from '../PreviewIfcLoader'
 import LoadingOverlay from 'stemn-shared/misc/Loading/LoadingOverlay/LoadingOverlay.jsx'
 import modelLocked from 'stemn-shared/assets/images/pure-vectors/model-locked.svg'
 
 /**
  * The CAD preview, independent of the conversion provider: requests the render, shows its progress, and once
  * the render is ready picks the viewer from the render's `cadProvider` (the open-source three.js viewer for
- * 'opencascade', the Autodesk viewer otherwise). The Autodesk viewer's scripts are only loaded for Autodesk renders.
+ * 'opencascade', the Autodesk viewer otherwise). Open-source renders of 2D drawings (DXF, DWG) are SVGs, shown by the
+ * 2D viewer, and IFC models get the IFC property panel. The Autodesk viewer's scripts are only loaded for Autodesk renders.
  * Render failures arrive as `fileRender.error` and are shown by PreviewFile.
  */
 export default class PreviewCadSwitch extends React.Component {
@@ -58,11 +62,15 @@ export default class PreviewCadSwitch extends React.Component {
         </div>
       )
     } else if (fileRender && fileRender.data) {
-      return isOpenCascadeRender(fileRender) ? (
-        <PreviewCadOssLoader previewId={previewId} fileMeta={fileMeta} fileRender={fileRender} />
-      ) : (
-        <PreviewCadLoader previewId={previewId} fileMeta={fileMeta} fileRender={fileRender} />
-      )
+      if (!isOpenCascadeRender(fileRender)) {
+        return <PreviewCadLoader previewId={previewId} fileMeta={fileMeta} fileRender={fileRender} />
+      }
+      const OpenSourceLoader = isDrawingFile(fileMeta)
+        ? PreviewDrawingLoader
+        : isIfcFile(fileMeta)
+          ? PreviewIfcLoader
+          : PreviewCadOssLoader
+      return <OpenSourceLoader previewId={previewId} fileMeta={fileMeta} fileRender={fileRender} />
     }
     return (
       <div className="rel-box flex" data-testid="cad-render-status">

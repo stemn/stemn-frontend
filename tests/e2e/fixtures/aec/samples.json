@@ -1,0 +1,182 @@
+{
+  "building-ifc2x3.ifc": {
+    "products": 12,
+    "schema": "IFC2X3",
+    "size": [
+      10000,
+      8015,
+      6200
+    ],
+    "storeys": [
+      "First floor",
+      "Ground floor"
+    ]
+  },
+  "building-v1.ifc": {
+    "products": 12,
+    "schema": "IFC4",
+    "size": [
+      10000,
+      8015,
+      6200
+    ],
+    "storeys": [
+      "First floor",
+      "Ground floor"
+    ]
+  },
+  "building-v2.ifc": {
+    "changes": {
+      "added": [
+        "05Rl1xtQHL1wCdqVO8DDSG"
+      ],
+      "from": "building-v1.ifc",
+      "labels": {
+        "05Rl1xtQHL1wCdqVO8DDSG": "Partition wall",
+        "0MtQqtdF9Mm8MMkT9dIPSb": "East wall 1",
+        "0NqUY9J35RuujnljEn6tL7": "North wall",
+        "1$ue0OK2nGqBQfdeZ8eIfk": "Ground floor slab",
+        "1EoSfMl9jPDwQQoMzoSB72": "South wall 2",
+        "1URxKkmEHVZRIYC0UiRpc1": "Column C1",
+        "1WTSC_IlTGYwZRpQmhJb98": "Window W1",
+        "22selLoHvU_x8BNe8tf7nn": "First floor slab",
+        "2EsatsKYrIiPDdszhZkuy6": "Column C2",
+        "30ZbcBWyfOcxv6J3o2PVPR": "East wall 2",
+        "3KR0qjKzfQbxd0iODEi2I$": "West wall",
+        "3QunN6jCfIEfZrUcxG5ySn": "South wall 1",
+        "3Ut_ZfPS9S_u3cBB38bgEj": "Front door"
+      },
+      "modified": [
+        "1WTSC_IlTGYwZRpQmhJb98"
+      ],
+      "moved": [
+        "1URxKkmEHVZRIYC0UiRpc1"
+      ],
+      "removed": [
+        "3Ut_ZfPS9S_u3cBB38bgEj"
+      ],
+      "unchanged": [
+        "0MtQqtdF9Mm8MMkT9dIPSb",
+        "0NqUY9J35RuujnljEn6tL7",
+        "1$ue0OK2nGqBQfdeZ8eIfk",
+        "1EoSfMl9jPDwQQoMzoSB72",
+        "22selLoHvU_x8BNe8tf7nn",
+        "2EsatsKYrIiPDdszhZkuy6",
+        "30ZbcBWyfOcxv6J3o2PVPR",
+        "3KR0qjKzfQbxd0iODEi2I$",
+        "3QunN6jCfIEfZrUcxG5ySn"
+      ]
+    },
+    "products": 12,
+    "schema": "IFC4",
+    "size": [
+      10000,
+      8000,
+      6200
+    ],
+    "storeys": [
+      "First floor",
+      "Ground floor"
+    ]
+  },
+  "corrupt.ifc": {
+    "error": "CONVERSION_FAILED"
+  },
+  "empty.ifc": {
+    "error": "EMPTY_MODEL"
+  },
+  "plan-v1.dwg": {
+    "entities": 6,
+    "layers": [
+      "WALLS",
+      "DOORS",
+      "FURNITURE"
+    ],
+    "units": "mm"
+  },
+  "plan-v1.dxf": {
+    "entities": 6,
+    "layers": [
+      "WALLS",
+      "DOORS",
+      "FURNITURE"
+    ],
+    "units": "mm"
+  },
+  "plan-v2.dwg": {
+    "changes": {
+      "added": [
+        "3F"
+      ],
+      "from": "plan-v1.dwg",
+      "labels": {
+        "38": "outline",
+        "39": "wall",
+        "3A": "door",
+        "3C": "bay window",
+        "3D": "table",
+        "3E": "room name",
+        "3F": "new wall"
+      },
+      "modified": [
+        "3C"
+      ],
+      "moved": [
+        "3A"
+      ],
+      "removed": [
+        "3D"
+      ],
+      "unchanged": [
+        "38",
+        "39",
+        "3E"
+      ]
+    },
+    "entities": 6,
+    "layers": [
+      "WALLS",
+      "DOORS",
+      "FURNITURE"
+    ],
+    "units": "mm"
+  },
+  "plan-v2.dxf": {
+    "changes": {
+      "added": [
+        "3F"
+      ],
+      "from": "plan-v1.dxf",
+      "labels": {
+        "38": "outline",
+        "39": "wall",
+        "3A": "door",
+        "3C": "bay window",
+        "3D": "table",
+        "3E": "room name",
+        "3F": "new wall"
+      },
+      "modified": [
+        "3C"
+      ],
+      "moved": [
+        "3A"
+      ],
+      "removed": [
+        "3D"
+      ],
+      "unchanged": [
+        "38",
+        "39",
+        "3E"
+      ]
+    },
+    "entities": 6,
+    "layers": [
+      "WALLS",
+      "DOORS",
+      "FURNITURE"
+    ],
+    "units": "mm"
+  }
+}
