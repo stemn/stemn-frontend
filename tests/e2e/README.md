@@ -25,7 +25,8 @@ API (`registerAccount`, `createProjectWithFiles`). Seed data is found by name, n
 seeded database. `fixtures/test.ts` adds `adaPage` (logged in as Ada through the form) and fails every test that throws an
 uncaught exception in the page.
 
-Each run registers new accounts, creates a project with a PNG and posts one comment on a seeded thread.
+Each run registers new accounts, creates a project with a PNG, posts one comment on a seeded thread, and creates
+public projects with threads and comments for the TanStack Query / websocket tests (`specs/threads-live.spec.ts`).
 On failure, traces, screenshots and videos are in `test-results/` (`npx playwright show-trace <trace.zip>`).
 
 In CI the reusable workflow `.github/workflows/e2e.yml` starts the backend with the composite action
