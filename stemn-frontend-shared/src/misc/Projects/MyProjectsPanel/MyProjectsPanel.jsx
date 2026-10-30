@@ -16,11 +16,6 @@ export default class MyProjectsPanel extends Component {
       page: 1,
     }
   }
-  UNSAFE_componentWillMount() {
-    this.props.getUserProjects({
-      userId: this.props.user._id,
-    })
-  }
   more = () => {
     this.setState((state) => ({
       page: state.page + 1,

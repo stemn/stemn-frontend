@@ -1,31 +1,13 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { getNotifications, markAsRead } from 'stemn-shared/misc/Notifications/Notifications.actions'
+import React from 'react'
+import { useMarkNotificationRead, useNotifications } from 'stemn-shared/api/queries/notifications'
+import { toLegacyEntity } from 'stemn-shared/api/query/legacyShape'
 import Notifications from './Notifications'
 
-const stateToProps = ({ notifications }) => ({
-  notifications,
-})
-
-const dispatchToProps = {
-  getNotifications,
-  markAsRead,
+/** Notifications layout (TanStack Query: the list is shared with the header badge and the tabs) */
+const NotificationsContainer = (props) => {
+  const notifications = useNotifications()
+  const { mutate: markAsRead } = useMarkNotificationRead()
+  return <Notifications {...props} notifications={toLegacyEntity(notifications)} markAsRead={markAsRead} />
 }
 
-const fetchConfigs = [
-  {
-    hasChanged: 'location.pathname',
-    onChange: (props) => {
-      props.getNotifications()
-    },
-  },
-]
-
-class NotificationsContainer extends Component {
-  render() {
-    return <Notifications {...this.props} />
-  }
-}
-
-export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(NotificationsContainer))
+export default NotificationsContainer

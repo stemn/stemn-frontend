@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { push as pushRoute } from 'stemn-shared/routing'
-import { saveProject } from 'stemn-shared/misc/Projects/Projects.actions'
+import { useSaveProject } from 'stemn-shared/api/queries/projects'
 import ProjectOverview from './ProjectOverview'
 import { getCanEdit } from 'stemn-shared/misc/Auth/Auth.utils'
 import { get } from 'lodash'
@@ -33,7 +33,6 @@ const stateToProps = ({ projects, projectSettings, fileList, auth, syncTimeline 
 
 const dispatchToProps = {
   pushRoute,
-  saveProject,
   getCount,
 }
 
@@ -51,10 +50,10 @@ const fetchConfigs = [
   },
 ]
 
-class LoginContainer extends Component {
-  render() {
-    return <ProjectOverview {...this.props} />
-  }
+/** The readme is edited in `projects.data[id]` (Redux); saving is the projects update mutation */
+const ProjectOverviewContainer = (props) => {
+  const { saveProject } = useSaveProject()
+  return <ProjectOverview {...props} saveProject={saveProject} />
 }
 
-export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(LoginContainer))
+export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(ProjectOverviewContainer))

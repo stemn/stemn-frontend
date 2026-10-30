@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import ProjectSettingsTags from './ProjectSettingsTags'
-import { saveProject, removeField, addField } from 'stemn-shared/misc/Projects/Projects.actions'
+import { removeField, addField } from 'stemn-shared/misc/Projects/Projects.actions'
+import { useSaveProject } from 'stemn-shared/api/queries/projects'
 
 const stateToProps = ({ projects }, { params }) => {
   const projectId = params.stub
@@ -16,15 +17,15 @@ const stateToProps = ({ projects }, { params }) => {
 }
 
 const dispatchToProps = {
-  saveProject,
   removeField,
   addField,
 }
 
-class ProjectSettingsTagsContainer extends Component {
-  render() {
-    return <ProjectSettingsTags {...this.props} />
-  }
+/** The tags are edited in `projects.data[id]` (Redux); saving is the projects update mutation */
+const ProjectSettingsTagsContainer = (props) => {
+  const { saveProject, savePending } = useSaveProject()
+  const project = props.project && { ...props.project, savePending }
+  return <ProjectSettingsTags {...props} project={project} saveProject={saveProject} />
 }
 
 export default connect(stateToProps, dispatchToProps)(ProjectSettingsTagsContainer)

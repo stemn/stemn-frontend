@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect, useMemo } from 'react'
+import { connect, useDispatch } from 'react-redux'
 import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
 import { get, omitBy, isEqual } from 'lodash'
 import { getBoards } from 'stemn-shared/misc/Threads/Threads.actions'
@@ -8,8 +8,9 @@ import { setFilter } from 'stemn-shared/misc/StringFilter/StringFilter.actions'
 import { getFilter } from 'stemn-shared/misc/StringFilter/StringFilter.utils'
 import newThreadModalName from 'stemn-shared/misc/Threads/NewThreadModal'
 import { showModal } from 'stemn-shared/misc/Modal/Modal.actions'
-import { search } from 'stemn-shared/misc/Search/Search.actions'
 import confirmAuth from 'stemn-shared/misc/Auth/actions/confirmAuth'
+import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
+import { useThreadList } from 'stemn-shared/api/queries/threads'
 
 import isUuid from 'stemn-shared/utils/isUuid.js'
 
@@ -38,13 +39,35 @@ const filterModel = {
   },
 }
 
-const stateToProps = ({ projects, threads, search, stringFilter }, { params, location }) => {
+const parseCompleted = (status) => {
+  if (status === 'closed') {
+    return true
+  } else if (status === 'open') {
+    return false
+  }
+  return undefined
+}
+
+/** The search criteria of the filter (status, groups, labels, user, text) */
+const toCriteria = (filterObject) =>
+  omitBy(
+    {
+      group: filterObject.groups,
+      labels: filterObject.labels,
+      name: filterObject.query && `/${filterObject.query}/i`,
+      complete: parseCompleted(filterObject.status),
+      users: filterObject.user && [filterObject.user],
+    },
+    (item) => item === '' || item === undefined,
+  )
+
+const stateToProps = ({ projects, threads, stringFilter }, { params, location }) => {
   const projectId = params.stub
   const project = projects.data[projectId]
   const boardId = get(threads, ['projects', projectId, 'boards', '0'])
   const board = get(threads, ['boards', boardId])
 
-  const page = location.query.page || 1
+  const page = Number(location.query.page) || 1
   const size = 30
 
   const filterDefaults = {
@@ -54,20 +77,14 @@ const stateToProps = ({ projects, threads, search, stringFilter }, { params, loc
   const filter = stringFilter[filterCacheKey] || getFilter(filterDefaults, filterModel, location.query)
   const filterIsDefault = isEqual(filterDefaults, filter.object)
 
-  const searchCacheKey = `threads-${projectId}-${page}`
-  const searchQueryKey = `${params.stub}-${page}-${JSON.stringify(filter.object)}`
-
   return {
     page,
     size,
-    threads: get(search, ['data', searchCacheKey], {}),
     projectId,
     project,
     boardId,
     board,
     boardModel: `threads.boards.${boardId}`,
-    searchQueryKey,
-    searchCacheKey,
     filter,
     filterModel,
     filterCacheKey,
@@ -90,7 +107,6 @@ const dispatchToProps = {
       }),
     ),
   setFilter,
-  search,
 }
 
 const fetchConfigs = [
@@ -102,44 +118,27 @@ const fetchConfigs = [
       })
     },
   },
-  {
-    hasChanged: 'searchQueryKey',
-    onChange: (props) => {
-      const parseCompleted = (status) => {
-        if (status === 'closed') {
-          return true
-        } else if (status === 'open') {
-          return false
-        }
-        return undefined
-      }
-      // Create the criteria object
-      const criteria = {
-        group: props.filter.object.groups,
-        labels: props.filter.object.labels,
-        name: props.filter.object.query && `/${props.filter.object.query}/i`,
-        complete: parseCompleted(props.filter.object.status),
-        users: props.filter.object.user && [props.filter.object.user],
-      }
-
-      props.search({
-        entityType: 'thread',
-        parentType: 'project',
-        parentId: props.projectId,
-        select: ['_id'],
-        cacheKey: props.searchCacheKey,
-        criteria: omitBy(criteria, (item) => item === ''),
-        size: props.size,
-        page: props.page,
-      })
-    },
-  },
 ]
 
-class ProjectThreadsContainer extends Component {
-  render() {
-    return <ProjectThreads {...this.props} />
-  }
+/**
+ * The thread list. The list (thread ids for the filter and page) and the rows are TanStack Query; the
+ * board (groups, labels) and the filter are still Redux. The page joins the board room, whose
+ * BOARD/GROUPS_UPDATED events (threads created, moved or deleted by someone else) invalidate the list.
+ */
+const ProjectThreadsContainer = (props) => {
+  const { projectId, page, size, filter, boardId } = props
+  const dispatch = useDispatch()
+  const criteria = useMemo(() => toCriteria(filter.object), [filter.object])
+  const list = useThreadList({ projectId, page, size, criteria })
+
+  useEffect(() => {
+    if (!boardId) return undefined
+    dispatch(joinRoom({ type: 'board', room: boardId }))
+    return () => dispatch(leaveRoom({ type: 'board', room: boardId }))
+  }, [dispatch, boardId])
+
+  const threads = { data: list.data, loading: list.isFetching }
+  return <ProjectThreads {...props} threads={threads} />
 }
 
 export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(ProjectThreadsContainer))

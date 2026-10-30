@@ -9,14 +9,18 @@ class LabelSelectRow extends Component {
   onChange = () => {
     // The onChange function works like a checkbox
     const { item, dispatch, value, model, onChange } = this.props
-    const labelIndex = value ? value.indexOf(item._id) : -1
-    if (labelIndex !== -1) {
-      dispatch(storeRemove(model, labelIndex))
-    } else {
-      dispatch(storePush(model, item._id))
+    const labels = value || []
+    const labelIndex = labels.indexOf(item._id)
+    // Model-bound use writes the store; controlled use (no model) only gets onChange(newLabels)
+    if (model) {
+      if (labelIndex !== -1) {
+        dispatch(storeRemove(model, labelIndex))
+      } else {
+        dispatch(storePush(model, item._id))
+      }
     }
     if (onChange) {
-      onChange()
+      onChange(labelIndex !== -1 ? labels.filter((id) => id !== item._id) : [...labels, item._id])
     } // Run the onChange function if required
   }
   render() {

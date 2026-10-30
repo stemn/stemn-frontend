@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import ProjectSettingsGeneral from './ProjectSettingsGeneral'
-import { saveProject, confirmLinkRemote, confirmDeleteProject } from 'stemn-shared/misc/Projects/Projects.actions'
+import { confirmLinkRemote, confirmDeleteProject } from 'stemn-shared/misc/Projects/Projects.actions'
+import { useSaveProject } from 'stemn-shared/api/queries/projects'
 
 const stateToProps = ({ projects, auth }, { params }) => {
   const projectId = params.stub
@@ -17,15 +18,15 @@ const stateToProps = ({ projects, auth }, { params }) => {
 }
 
 const dispatchToProps = {
-  saveProject,
   confirmLinkRemote,
   confirmDeleteProject,
 }
 
-class ProjectSettingsGeneralContainer extends Component {
-  render() {
-    return <ProjectSettingsGeneral {...this.props} />
-  }
+/** The form still edits `projects.data[id]` (Redux); saving is the projects update mutation */
+const ProjectSettingsGeneralContainer = (props) => {
+  const { saveProject, savePending } = useSaveProject()
+  const project = props.project && { ...props.project, savePending }
+  return <ProjectSettingsGeneral {...props} project={project} saveProject={saveProject} />
 }
 
 export default connect(stateToProps, dispatchToProps)(ProjectSettingsGeneralContainer)

@@ -37,9 +37,10 @@ export default class EditorNew extends Component {
     }
   }
   onChange = (newValue) => {
-    const { model, change } = this.props
-    // Update the redux value
-    change(model, newValue)
+    const { model, change, onChange } = this.props
+    // Update the redux value (model-bound use), or report the value (controlled use, no model)
+    if (model) change(model, newValue)
+    if (onChange) onChange(newValue)
     // Update internal value
     this.setState({
       value: newValue,
@@ -66,7 +67,7 @@ export default class EditorNew extends Component {
     }
   }
   render() {
-    const { model, change, hideToolbar, placeholder, tabIndex, ...otherProps } = this.props
+    const { model, change, onChange, hideToolbar, placeholder, tabIndex, ...otherProps } = this.props
     const { value } = this.state
     const { codemirror } = this.state
 

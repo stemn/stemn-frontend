@@ -22,9 +22,11 @@ export class Component extends React.Component {
   }
 
   selectDate = (date) => {
-    this.props.dispatch(storeChange(this.props.model, date ? date.format() : ''))
+    const value = date ? date.format() : ''
+    // Model-bound use writes the store; controlled use (no model) only gets onChange(value)
+    if (this.props.model) this.props.dispatch(storeChange(this.props.model, value))
     if (this.props.onChange) {
-      this.props.onChange()
+      this.props.onChange(value)
     }
   }
 

@@ -14,36 +14,22 @@ import { MdMoreHoriz } from 'react-icons/md'
 import IsOwner from 'stemn-shared/misc/Auth/IsOwner/IsOwner.jsx'
 import LoadingPlaceholder from 'stemn-shared/misc/Loading/LoadingPlaceholder'
 import LoadingAnimation from 'stemn-shared/misc/Loading/LoadingAnimation'
-import Form from 'stemn-shared/misc/Forms/Form'
 
 export default class Comment extends Component {
-  confirmDelete = () => {
-    const { showConfirm, deleteComment, comment, timelineCacheKey } = this.props
-    showConfirm().then(() =>
-      deleteComment({
-        comment: comment.data,
-        timelineCacheKey,
-      }),
-    )
-  }
-  submitReaction = (reactionType) => {
-    const { commentId, toggleReaction } = this.props
-    toggleReaction({ commentId, reactionType })
-  }
-  startEdit = () => {
-    const { startEdit, comment } = this.props
-    startEdit({ commentId: comment.data._id })
-  }
-  finishEdit = () => {
-    const { finishEdit, comment } = this.props
-    finishEdit({ commentId: comment.data._id })
-  }
-  updateComment = () => {
-    const { updateComment, comment } = this.props
-    updateComment({ comment: comment.form })
-  }
   render() {
-    const { commentId, comment, showMeta, children, entityModel, style } = this.props
+    const {
+      commentId,
+      comment,
+      showMeta,
+      children,
+      style,
+      startEdit,
+      finishEdit,
+      changeBody,
+      updateComment,
+      confirmDelete,
+      submitReaction,
+    } = this.props
 
     if (!comment || !comment.data) {
       return (
@@ -88,7 +74,7 @@ export default class Comment extends Component {
             <span className={cn(classes.date, 'text-ellipsis')}>&nbsp;- {fromNow(comment.data.timestamp)}</span>
             <div className="flex" />
             {!showMeta && (
-              <ReactionPopup reactions={comment.data.reactions} preferPlace="above" submitFn={this.submitReaction} />
+              <ReactionPopup reactions={comment.data.reactions} preferPlace="above" submitFn={submitReaction} />
             )}
             {!showMeta && (
               <IsOwner ownerId={comment.data.owner._id}>
@@ -97,8 +83,8 @@ export default class Comment extends Component {
                     <MdMoreHoriz size="20px" />
                   </SimpleIconButton>
                   <div className="PopoverMenu">
-                    {!comment.editActive && <a onClick={this.startEdit}>Edit</a>}
-                    <a onClick={this.confirmDelete}>Delete</a>
+                    {!comment.editActive && <a onClick={startEdit}>Edit</a>}
+                    <a onClick={confirmDelete}>Delete</a>
                   </div>
                 </Popover>
               </IsOwner>
@@ -106,9 +92,7 @@ export default class Comment extends Component {
           </div>
           <div className={classes.commentContent}>
             {comment.editActive ? (
-              <Form model={`${entityModel}.form`} value={comment.data}>
-                {comment.form ? <Editor model={`${entityModel}.form.body`} value={comment.form.body} /> : null}
-              </Form>
+              <Editor value={comment.form.body} onChange={changeBody} />
             ) : (
               <EditorDisplay value={comment.data.body} />
             )}
@@ -116,13 +100,13 @@ export default class Comment extends Component {
           {comment.editActive ? (
             <div className={classes.commentFooter}>
               <div>
-                <a className="link-primary" onClick={this.finishEdit}>
+                <a className="link-primary" onClick={finishEdit}>
                   Cancel
                 </a>
                 &nbsp;
                 <b className="text-interpunct text-grey-3" />
                 &nbsp;
-                <a className="link-primary" onClick={this.updateComment}>
+                <a className="link-primary" onClick={updateComment}>
                   Save
                 </a>
               </div>
@@ -132,7 +116,7 @@ export default class Comment extends Component {
           )}
           {hasReactions && (
             <div className={classes.reactions}>
-              <Reactions reactions={comment.data.reactions} submitFn={this.submitReaction} />
+              <Reactions reactions={comment.data.reactions} submitFn={submitReaction} />
             </div>
           )}
         </div>

@@ -1,62 +1,33 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import fetchDataHoc from 'stemn-shared/misc/FetchDataHoc'
-import { getProject } from 'stemn-shared/misc/Projects/Projects.actions'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { useProject } from 'stemn-shared/api/queries/projects'
+import { toLegacyEntity } from 'stemn-shared/api/query/legacyShape'
 import { joinRoom, leaveRoom } from 'stemn-shared/misc/Websocket/Websocket.actions'
 import Project from './Project'
 import { notFound } from 'route-actions'
 import { replace } from 'stemn-shared/routing'
 
-const stateToProps = ({ projects }, { params, location }) => ({
-  projectId: params.stub,
-  project: projects.data[params.stub],
-  pathname: location.pathname,
-})
+/**
+ * The project layout (header, tabs) of every /project/:stub page. The project is the TanStack Query
+ * `projects.detail` query; its legacy bridge keeps `projects.data[id]` in sync for the tab pages that
+ * still read Redux. The page joins the project room: PROJECT/PROJECT_UPDATED invalidates the query.
+ */
+const ProjectContainer = (props) => {
+  const { params, location } = props
+  const projectId = params.stub
+  const dispatch = useDispatch()
+  const query = useProject(projectId)
 
-const dispatchToProps = {
-  getProject,
-  joinRoom,
-  leaveRoom,
-  replace,
+  useEffect(() => {
+    if (query.isError) dispatch(replace(notFound()))
+  }, [dispatch, query.isError])
+
+  useEffect(() => {
+    dispatch(joinRoom({ room: projectId, type: 'project' }))
+    return () => dispatch(leaveRoom({ room: projectId, type: 'project' }))
+  }, [dispatch, projectId])
+
+  return <Project {...props} projectId={projectId} project={toLegacyEntity(query)} pathname={location.pathname} />
 }
 
-const fetchConfigs = [
-  {
-    hasChanged: 'projectId',
-    onChange: (props) => {
-      props
-        .getProject({
-          projectId: props.projectId,
-          size: 'lg',
-          force: true,
-        })
-        .catch(() => props.replace(notFound()))
-      props.joinRoom({
-        room: props.projectId,
-        type: 'project',
-      })
-    },
-  },
-  {
-    // Leave the project room on unmount/change
-    unmount: true,
-    hasChanged: 'projectId',
-    onChange: (nextProps, prevProps) => {
-      // We leave the prevRoom if there is a prev threadId
-      if (prevProps.leaveRoom && prevProps.projectId) {
-        prevProps.leaveRoom({
-          type: 'project',
-          room: prevProps.projectId,
-        })
-      }
-    },
-  },
-]
-
-class ProjectContainer extends Component {
-  render() {
-    return <Project {...this.props} />
-  }
-}
-
-export default connect(stateToProps, dispatchToProps)(fetchDataHoc(fetchConfigs)(ProjectContainer))
+export default ProjectContainer

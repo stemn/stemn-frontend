@@ -1,21 +1,16 @@
 import { connect } from 'react-redux'
 import { registerModal } from 'stemn-shared/misc/Modal/ModalRegistry'
-import { storeChange } from 'stemn-shared/misc/Store/Store.actions'
 import NewThreadModal from './NewThreadModal'
-import { newThread } from 'stemn-shared/misc/Threads/Threads.actions'
-import { newComment } from 'stemn-shared/misc/Comments/Comments.actions'
 import { projectThreadRoute } from 'route-actions'
 import { push } from 'stemn-shared/routing'
 
+// The board (groups) is still Redux; the thread and its first comment are created with the
+// TanStack Query mutations (NewThreadModal.jsx)
 const stateToProps = ({ threads }, { boardId }) => ({
   board: threads.boards[boardId],
-  boardModel: `threads.boards.${boardId}`,
 })
 
 const dispatchToProps = {
-  newThread,
-  newComment,
-  change: storeChange,
   goToThreadRoute: ({ threadId, projectId }) => push(projectThreadRoute({ threadId, projectId })),
 }
 
