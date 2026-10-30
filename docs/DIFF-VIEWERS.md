@@ -98,6 +98,8 @@ Unified Diff**, and with two revisions selected both the unified and the side-by
 (`FileCompareInner`): `FileDiffView` for models (3MF included), `DxfDiffView` for drawings (`isDrawingFile`). G-code
 (`getViewerType` `gcode`) opens in `GcodeDiffView` the same way (`isGcodeFile`). Files the API cannot
 diff fall back to the original side-by-side previews with a notice. In the commit and changes views (`FileCompare` with two revisions), CAD files open in the unified mode.
+Simulation results (`getViewerType` `simulation`) do the same in `FileDiff/SimulationDiffView` (vtk.js, its own lazy chunk).
+Opened alone, they preview in `PreviewSimulation`, which `PreviewCadSwitch` picks for renders whose `cadProvider` is `vtk`.
 
 PCB and electronics files (`getViewerType` `pcb`: KiCad `.kicad_pcb`/`.kicad_sch`, Eagle `.brd`, Gerber layers, Excellon drill
 files, zips of a Gerber set) get the same menu entry and open in `PcbDiffView` (the 2D viewer, `Svg2dDiffView`, on the PCB
@@ -261,9 +263,63 @@ stemn-backend ADR-026 and stemn-frontend ADR-012. Both formats convert in `servi
   given. The panel sorts labels in number order.
 * The 3MF material shows through `DiffEntityPanel`'s `details` prop; a viewer's own per-entity details go there.
 
+## Optional extension: field deltas (simulation results, workstream E)
+
+Adapters whose entities carry **fields** (values per point or per cell, such as pressure or velocity) can compare those values
+between A and B. The contract above is unchanged by this extension. Every part of it is optional, and the simulation adapter is
+the only one that uses it today (stemn-backend ADR-027).
+
+* **Adapter**: `IDiffAdapter.annotate?({ fileId, revisionA, revisionB, a, b, entities })` returns `{ entities, fields? }`.
+  `core.diff.create` calls it after `compare`. It may add `changes` to the compared entities and a `fields` section to the
+  manifest; it does not change classes.
+* **Changes**: a field becomes the change `{ attribute: 'field:<name>', a: [min, max] | null, b: [min, max] | null, delta? }`.
+  Ranges are by magnitude for vectors. `delta` is an `IDiffFieldDelta`:
+  * `{ min, max, mean, rms, changed, count }` of B − A over the entity's points or cells, for scalars
+  * the same of |B| − |A| for vectors, plus `components: [...]` with each component's B − A
+  * present only when A and B have the same cells
+
+  The scene's `units['field:<name>']` is `'range'`, so `formatValue` and `formatDelta` print `0 … 7` and `-0.25 … +0.5` in the
+  shared deltas table. Field ranges are a *derived* attribute: new results alone never make an entity modified.
+* **Manifest** (optional):
+
+  ```ts
+  fields?: {
+    fields: Array<{ name; association: 'point' | 'cell'; components; a: number[] | null; b: number[] | null }>
+    entities: {
+      [id]: {
+        topology: 'same' | 'different'
+        deltas: Array<{ field; association; components; delta: IDiffFieldDelta; path }>
+      }
+    }
+  }
+  ```
+
+  `topology: 'same'` means A and B have the same cells connected the same way. Only then are fields compared value by value,
+  and a field missing from `deltas` did not change. `path` names B − A on B's surface:
+
+  `GET /api/v1/sync/diffField/{projectId}/{fileId}/{revisionA}/{revisionB}/{path}`
+
+  It returns float32 values, little endian, per point or cell of the surface: one value per scalar, or the components followed
+  by |B| − |A| per vector.
+* **Viewer**: Δ mode colours each entity whose topology is `'same'` by B − A. It uses a diverging map (blue less, red more) with
+  an auto range symmetric about zero, a hand-set ± limit and invert. Every other entity keeps its class treatment
+  (`unifiedAppearance`), and the panel says why: "meshed again, Δ is not drawn on it". A and B modes colour one revision's
+  entities by the field's values on one range for A and B. The legend shows the range in use (`simulation-legend`).
+* **Render files**: a simulation revision is a render with `cadProvider: 'vtk'`. Its files are read with
+  `GET /sync/downloadRenderFile/{projectId}/{fileId}/{revisionId}/{path}`, with `path` plain or url-encoded as one segment
+  (`blocks%2F0%2Findex.json`, what the viewer sends):
+  * `scene.json`
+  * `blocks/<b>/index.json` and `blocks/<b>/data/<array>`: each block's surface in the vtk.js serialisation
+  * `thumbnail.png`
+
+  `payloadRef` is `{ block, topology, fields, surface: { points, cells } }`.
+
+Workstreams with per-entity values that are not geometry (G-code feed rates or temperatures per layer, IFC quantities) can use
+the same section: `topology: 'same'` when the values line up one to one, a `path` per array the viewer colours by.
+
 ## Not done yet
 
-* Workstream E (the simulation adapters and viewers).
+* Simulation results: OpenFOAM cases, multi-file collections (`.pvd`, `.vtm`) and Exodus II (stemn-backend FUTURE-WORK).
 * IFC and drawings: the limits in stemn-backend `docs/FUTURE-WORK.md` (spaces and openings, linetypes, fonts, layouts, xrefs,
   `<use>` for blocks, AutoCAD-written DWG).
 * PCB: diffs of a folder's Gerber files shown as one board (they have no revisions of their own: diff a zip of the set, or each

@@ -58,6 +58,16 @@ layer viewer (status line, legend, layer slider, travel), then `tube-v1.gcode` �
 colour on the canvas, the moved distance, the moves only one revision extrudes in the modified layer (11 only in B), the layer
 height slider, side by side with linked cameras, and the 3MF items' materials. Like the CAD specs it needs a backend with the
 OpenCascade converter (stemn-backend ADR-026 for 3MF build items and G-code).
+
+
+`specs/simulation.spec.ts` uploads `fixtures/simulation/inlet.vtu` and checks the vtk.js preview and its field legend, then
+`manifold-v1.vtk` → `-v2.vtk` (copies of the backend's simulation samples) and checks the simulation diff viewer:
+- the class counts, the entity rows and the class colours on the canvas
+- the field details of the panel
+- Δ mode, with the legend's range (−1 to +1 for `p`, ±0.5 for `U`), the hand-set range and invert
+- the field in B, and side by side
+
+It needs a backend with the simulation adapter (stemn-backend ADR-027), which runs in the same converter container.
 On failure, traces, screenshots and videos are in `test-results/` (`npx playwright show-trace <trace.zip>`).
 
 In CI the reusable workflow `.github/workflows/e2e.yml` starts the backend with the composite action

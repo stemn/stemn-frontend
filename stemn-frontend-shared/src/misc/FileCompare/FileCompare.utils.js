@@ -52,6 +52,8 @@ const compareModeTable = {
   pdf: [0, 1, 4],
   // PCB and electronics: the unified diff (PcbDiffView) for what the API's PCB converter reads
   pcb: [5, 0, 1, 2, 3, 4],
+  // simulation results: the unified diff with field deltas (FileDiff/SimulationDiffView)
+  simulation: [5, 0, 1, 4],
   gdoc: [0, 1, 4],
   other: [0, 1, 4],
   none: [4],
@@ -75,8 +77,13 @@ export const isPcbFile = (file) => Boolean(file && file.name) && getViewerType(f
 // G-code compares in the layer diff viewer
 export const isGcodeFile = (file) => Boolean(file && file.name) && getViewerType(file.name, file.provider) === 'gcode'
 
-// the files the diff viewers compare: CAD files, PCB and electronics files and G-code toolpaths
-export const isDiffableFile = (file) => isCadFile(file) || isPcbFile(file) || isGcodeFile(file)
+// simulation results (VTK) compare in the simulation diff viewer
+export const isSimulationFile = (file) =>
+  Boolean(file && file.name) && getViewerType(file.name, file.provider) === 'simulation'
+
+// the files the diff viewers compare: CAD files, PCB and electronics files, G-code toolpaths and simulation results
+export const isDiffableFile = (file) =>
+  isCadFile(file) || isPcbFile(file) || isGcodeFile(file) || isSimulationFile(file)
 
 export const orderItemsByTime = (mode, item1, item2) => {
   if (mode === 'single' || !item2) {
