@@ -37,6 +37,15 @@ the CubeSat project, opens the file, picks **Compare: Unified Diff** and the two
 viewer: the five class counts, the entity panel, the four change colours on the canvas, the A → B slider, the entity details and
 the side-by-side view with linked cameras. It needs a backend with the diff route (stemn-backend ADR-022) and the OpenCascade
 converter.
+`specs/diff-aec.spec.ts` uploads the backend's civil and architecture pairs (`fixtures/aec`), an IFC building and a DXF floor plan,
+each as two revisions of one file, and checks:
+- the class counts, the entity rows, and the class colours (canvas pixels for IFC, the SVG elements' computed colour and opacity
+  for DXF);
+- the IFC property panel and storey filter;
+- the 2D slider, layer toggles and side-by-side view;
+- the IFC and DXF previews.
+
+It needs a backend whose CAD converter reads IFC and DXF (stemn-backend ADR-025).
 On failure, traces, screenshots and videos are in `test-results/` (`npx playwright show-trace <trace.zip>`).
 
 In CI the reusable workflow `.github/workflows/e2e.yml` starts the backend with the composite action

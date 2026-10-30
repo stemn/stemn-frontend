@@ -92,8 +92,9 @@ The `?` button in the toolbar lists them too (`diffShortcuts`). They are ignored
 
 ## Where it shows
 
-`FileCompare`: for CAD files (`getViewerType` `autodesk`) the compare menu offers **Compare: Unified Diff**, and with two
-revisions selected both the unified and the side-by-side modes open the diff viewer (`FileCompareInner`). Files the API cannot
+`FileCompare`: for CAD files (`getViewerType` `autodesk`, which includes IFC, DXF and DWG) the compare menu offers **Compare:
+Unified Diff**, and with two revisions selected both the unified and the side-by-side modes open the diff viewer
+(`FileCompareInner`): `FileDiffView` for models, `DxfDiffView` for drawings (`isDrawingFile`). Files the API cannot
 diff fall back to the original side-by-side previews with a notice. In the commit and changes views (`FileCompare` with two revisions), CAD files open in the unified mode.
 
 ## Worked example: a PCB adapter (workstream B)
@@ -169,9 +170,53 @@ unit test runs `compare` on their committed `scene.json` files (like `core/diff/
 uploads both revisions and checks the classes (like `api/routes/sync/__tests__/diffFile.test.ts`), and a Playwright spec opens
 the compare view (like `tests/e2e/specs/diff.spec.ts`).
 
+## Civil and architecture (workstream C)
+
+**IFC** (`aec` adapter, ADR-011 here, ADR-025 in stemn-backend):
+* The converter (IfcOpenShell) writes a glb with a node per product with a body. The entity id is the GlobalId; the parent is
+  the spatial element it is in (a storey or space).
+* `extras.stemn.ifc` holds the class, name, type, material, storey, the class's attributes, `psets` and `quantities`.
+* The diff compares those attributes and every property (`Pset_WallCommon.FireRating`). Volume, area, size and triangles are
+  `derived`. Units are as for CAD.
+* `FileDiffView` adds the lazy IFC property panel (`FileDiff/IfcPanel`) and a storey filter for `adapter.name === 'aec'`.
+
+**DXF and DWG** (`dxf` adapter): the converter (ezdxf; DWG through LibreDWG) writes `drawing.svg` instead of `model.glb`.
+* One entity per modelspace entity: id the handle, kind the DXF type, parent `layer:<name>`, `payloadRef` `{ svg: handle }`.
+* `units.length` is the drawing's unit (`mm` for most); `formatLength` prints `m` and `mm` as millimetres, any other unit as
+  it is, and `unit` (unitless) as a bare number.
+* The viewer is the shared 2D viewer below.
+
+### The shared 2D viewer (`FileDiff/Svg2dDiffView`, used by DXF and PCB)
+
+A 2D file type needs only a wrapper that says where a revision's SVG is (`DxfDiffView`, about 15 lines). The SVG must look like
+this:
+
+```txt
+<svg viewBox="..." data-units="mm">                    one coordinate frame for A and B
+  <rect data-background="true" fill="#001023"/>        optional: the canvas colour, drawn once, never styled
+  <g data-diff-frame="true" ...>                       the frame the manifest's centreA/centreB are in (else the <svg>)
+    <g data-layer="F.Cu" data-layer-name="Front copper" [data-off="true" | data-layer-default="hidden"]>   back to front
+      <g data-entity-id="<payloadRef.svg>" [data-paint="fill|stroke|both"]> shapes </g>   one or more per entity
+```
+
+* **Entities:** an entity is every element with `data-entity-id` equal to its `payloadRef.svg`. It may span several layers
+  (a footprint's pads and silkscreen).
+* **Appearances** follow `unifiedAppearance` / `sideBySideAppearance` like the 3D viewer:
+  - The class colour goes on every painted fill and stroke inside the entity. `data-paint` says which when the paint is on a group.
+  - The colour also goes on `color`, for `currentColor`.
+  - Opacity goes on the entity element, so overlapping shapes do not add up. `null` hides the entity.
+* **The slider:** B's copy of a moved entity is translated by `centreA - centreB` times `1 - t`. When both `payloadRef`s have
+  `at: [x, y, degrees]` (SVG `rotate()` sense, the element's parent's units), it also turns about the placement origin.
+* **The rest of the view:** the displacement line is drawn in `data-diff-frame`; layer toggles act on both revisions; side by
+  side shares one view box.
+* **Previews:** `SvgDiffCanvas` without a manifest draws a plain preview (`PreviewDrawing`).
+* **Safety:** SVGs are sanitised on parse.
+
 ## Not done yet
 
-* Workstreams B to E (the adapters and viewers above).
+* Workstreams B, D and E (the PCB, additive and simulation adapters and viewers).
+* IFC and drawings: the limits in stemn-backend `docs/FUTURE-WORK.md` (spaces and openings, linetypes, fonts, layouts, xrefs,
+  `<use>` for blocks, AutoCAD-written DWG).
 * CAD: instancing for repeated parts and a simplified fallback for huge models (only "changes only" above 4 M triangles today);
   per-solid deltas inside a part; Draco-compressed glbs.
 * The unified view in the desktop app's FileCompare pages is the same code but is only exercised by the website e2e test.

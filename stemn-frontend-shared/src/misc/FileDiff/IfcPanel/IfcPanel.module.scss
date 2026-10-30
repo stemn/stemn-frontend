@@ -1,0 +1,52 @@
+@value border1 from "theme";
+
+.panel {
+  border-top: 1px solid border1;
+  padding: 8px 10px;
+  font-size: 12px;
+  overflow: auto;
+}
+
+.storey {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+
+  select {
+    flex: 1;
+    font-size: 12px;
+  }
+}
+
+.group {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+
+  th {
+    text-align: left;
+    font-weight: 600;
+    padding: 3px 0;
+    border-bottom: 1px solid border1;
+  }
+
+  td {
+    padding: 2px 4px 2px 0;
+    vertical-align: top;
+    word-break: break-word;
+  }
+
+  td:first-child {
+    color: rgba(0, 0, 0, 0.55);
+    width: 45%;
+  }
+}
+
+.changed td {
+  background: #fff3d6;
+}
+
+.empty {
+  color: rgba(0, 0, 0, 0.45);
+}

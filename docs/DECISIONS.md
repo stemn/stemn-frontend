@@ -108,3 +108,37 @@ Each entry states the context, the decision and its consequences. Newer entries 
   - Formats the backend cannot diff (proprietary CAD, Autodesk-converted deployments) keep the original side-by-side previews and
     say so.
 
+
+## ADR-011: Civil and architecture diffs: an IFC property panel, and one shared 2D SVG diff viewer
+
+* Status: accepted (workstream C of `plans/file-diff-viewers.md`, with stemn-backend's `aec` and `dxf` adapters, ADR-025 there)
+* Decision:
+  - **IFC** models diff in the 3D viewer (`FileDiffView`) as they are. When the manifest's adapter is `aec`, the entity panel adds the
+    IFC property panel (`FileDiff/IfcPanel`, its own lazy chunk) and a storey filter. The panel shows the selected product's
+    attributes, property sets and quantities, read from its glTF node (`userData.stemn.ifc`), and marks what changed from A.
+    The storey filter hides the products on the other storeys, both in the canvas and in the panel. The IFC preview
+    (`PreviewIfc`) is `PreviewCadOss` with the same panel, through two new optional props: `onIsolate` and `hiddenIds`.
+  - **DXF and DWG** renders are SVGs. They diff in a 2D viewer that owns no file type, `FileDiff/Svg2dDiffView`:
+    - `svg2d.utils.ts`: view boxes and the moved-entity placement along the slider, pure and unit-tested.
+    - `svgDocument.ts`: sanitised parsing, entities by `data-entity-id`, layers, class appearances on fill, stroke and
+      currentColor, the background.
+    - `SvgDiffCanvas`: A over B, or one pane, with pan, zoom and fit on a shared view box. It also draws a plain preview.
+    - `Svg2dDiffView`: the view, reusing the toolbar, entity panel, load status and state of the 3D viewer, plus layer toggles.
+
+    `DxfDiffView` only says where a revision's SVG is (`downloadRenderFile/.../drawing.svg`). `PreviewDrawing` is the DXF/DWG
+    preview on the same canvas.
+  - The 3D viewer's chrome is split into shared pieces that every viewer uses: `DiffToolbar`, `DiffEntityPanel` (with `details`
+    for a viewer's own rows), `DiffLoadStatus`, `useDiffLoad` and `useDiffViewState`.
+* Why:
+  - The founder asked for civil and architecture support in the unified diff.
+  - IFC models are glTF on the client like CAD, so they need their BIM data next to the geometry, not another viewer.
+  - Workstreams B (PCB) and E (simulation) build on the same pieces. PCB wraps `Svg2dDiffView` like DXF does, and needs the
+    multi-element entities, `data-paint`, `payloadRef.at` rotations, backgrounds and default-hidden layers that are already in.
+* Consequences:
+  - The main bundle grows by 0.5 kB gzipped (448.7 → 449.2 kB; Vite split the shared jsx runtime differently), within the 2%
+    budget.
+  - The new lazy chunks, gzipped: `DxfDiffView` 1.5 kB and `SvgDiffCanvas` 4.1 kB plus 0.5 kB CSS (no three.js),
+    `PreviewDrawing` 1.1 kB, `IfcPanel` 0.8 kB plus 0.4 kB CSS, `PreviewIfc` 0.6 kB.
+  - Picking thin lines checks a few pixels around the pointer. A drawing's text uses the browser's sans-serif. Every SVG is
+    sanitised (no scripts, `foreignObject`, `on*` handlers or `javascript:` links) even though the API serves it under
+    `default-src 'none'`.
