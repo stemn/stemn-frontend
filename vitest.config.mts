@@ -32,7 +32,7 @@ export default defineConfig({
     }),
   },
   test: {
-    include: ['stemn-frontend-{website,shared,desktop}/**/*.test.{ts,tsx,js,jsx,mts}'],
+    include: ['stemn-frontend-{website,shared,desktop,tauri}/**/*.test.{ts,tsx,js,jsx,mts}'],
     exclude: ['**/node_modules/**', '**/build/**', '**/dist/**', '**/out/**'],
     environment: 'node',
   },

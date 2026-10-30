@@ -1,0 +1,9 @@
+# Dependencies (installed at the workspace root)
+node_modules
+
+# Build output (web assets, the bridge script), e2e screenshots / reports, measurements
+dist
+dist-bridge
+qa
+
+*.log

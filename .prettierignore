@@ -9,6 +9,11 @@ qa
 test-results
 playwright-report
 coverage
+dist-bridge
+stemn-frontend-tauri/src-tauri/target
+stemn-frontend-tauri/src-tauri/gen
+# Tauri desktop entry template (not HTML)
+stemn-frontend-tauri/src-tauri/*.hbs
 
 # Vendored third-party code (kept byte-for-byte)
 stemn-frontend-website/public/static
