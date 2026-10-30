@@ -8,4 +8,3 @@ use the same files. Copy them again when the backend samples are regenerated; do
   1.2 to 1.6 m (modified), Column C1 moved 3.5 m, nine products unchanged, for `specs/diff-aec.spec.ts`
 - `plan-v1.dxf` → `plan-v2.dxf` (mm, layers WALLS, DOORS and FURNITURE): wall line `3F` added, table circle `3D` removed, bay
   window polyline `3C` lengthened (modified), door block `3A` moved 500 mm, three entities unchanged
-- `samples.json`: the backend's expectations, the classes above by GlobalId and handle
