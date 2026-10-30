@@ -1,0 +1,83 @@
+# pnpm workspace settings. pnpm 12 reads only auth/registry/proxy settings from .npmrc, so everything
+# that used to be npm configuration (workspaces, overrides, save-exact) lives here.
+packages:
+  - stemn-frontend-shared
+  - stemn-frontend-website
+  - stemn-frontend-desktop
+  - tests/e2e
+
+# node_modules: pnpm's default isolated layout, nothing hoisted. electron-builder needs no hoisting
+# here because the desktop app bundles everything into dist/ (electron-vite) and ships no
+# node_modules (electron-builder.yml: npmRebuild: false, files: dist/**).
+
+# npm's save-exact=true (.npmrc): `pnpm add` writes exact versions
+saveExact: true
+
+# npm installed whatever the lockfile pinned, however new. pnpm 12 defaults to a 1 day quarantine
+# that it also re-applies to lockfile entries, so a lockfile with a release from the last 24 h fails
+# `pnpm install --frozen-lockfile`. Off for the switch; turn it on together with Renovate's
+# minimumReleaseAge.
+minimumReleaseAge: 0
+
+# dependency build scripts pnpm may run (an unlisted one fails the install). The Electron binary is
+# downloaded explicitly (node stemn-frontend-desktop/node_modules/electron/install.js), as before.
+allowBuilds:
+  # the prebuilt @parcel/watcher-<platform> packages are used; this only builds from source
+  '@parcel/watcher': false
+  # prints a funding message
+  core-js-pure: false
+  # picks the 7-Zip binary for Squirrel.Windows installers; the Windows build uses NSIS
+  electron-winstaller: false
+  # checks the napi binary of eslint-import-resolver-typescript's resolver (allowed in stemn-backend too)
+  unrs-resolver: true
+
+# versions shared by more than one package, referenced as "catalog:"
+# (not typescript at the root: typescript-eslint and the root `tsc -p tests/e2e` need TypeScript 6,
+# the 6.0.3 npm hoisted to the root as typescript-eslint's peer; the apps use TypeScript 7)
+catalog:
+  '@playwright/test': 1.64.1
+  '@sentry/browser': 11.10.0
+  '@types/lodash': 4.17.27
+  '@types/node': 26.6.6
+  '@types/react': 19.3.0
+  '@types/react-dom': 19.3.0
+  '@types/three': 0.186.0
+  '@vitejs/plugin-react': 6.1.2
+  auto-launch: 5.0.6
+  autoprefixer: 10.6.2
+  axios: 1.21.0
+  classnames: 2.5.1
+  electron: 45.1.0
+  electron-json-storage: 4.6.0
+  electron-log: 5.4.4
+  electron-updater: 6.8.11
+  express: 5.3.0
+  immer: 11.2.9
+  ini: 7.0.0
+  lodash: 4.18.1
+  normalize.css: 8.0.1
+  react: 19.3.1
+  react-dom: 19.3.1
+  react-icons: 5.7.0
+  react-redux: 9.3.1
+  react-router: 8.5.1
+  redux: 5.0.1
+  redux-logger: 3.0.6
+  redux-promise-middleware: 6.2.0
+  redux-thunk: 3.1.0
+  sass: 1.107.0
+  sql.js: 1.15.2
+  typescript: 7.0.2
+  unzipper: 0.12.5
+  vite: 8.3.5
+  winreg: 1.2.5
+
+# npm "overrides" from package.json
+overrides:
+  react: 'catalog:'
+  react-dom: 'catalog:'
+  katex: 0.19.1
+  ansi-to-react>linkify-it: 5.0.2
+  # @reduxjs/toolkit (via recharts) resolved reselect@^5.1.0 to 5.3.0 under npm; pnpm would dedupe it
+  # onto recharts' pinned 5.2.0. Kept at 5.3.0 so the switch changes no resolved versions.
+  '@reduxjs/toolkit>reselect': 5.3.0

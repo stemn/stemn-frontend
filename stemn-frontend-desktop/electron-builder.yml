@@ -1,7 +1,7 @@
 # electron-builder 26 configuration for Stemn Desktop.
-#   npm run package          Linux AppImage + unpacked dir (release/)
-#   npm run package:win      Windows NSIS installer (run on Windows or with wine)
-#   npm run package:mac      macOS dmg + zip (run on macOS, needs signing for notarisation)
+#   pnpm run package          Linux AppImage + unpacked dir (release/)
+#   pnpm run package:win      Windows NSIS installer (run on Windows or with wine)
+#   pnpm run package:mac      macOS dmg + zip (run on macOS, needs signing for notarisation)
 # Everything the app needs is bundled into dist/ by electron-vite, so the
 # packaged app ships no node_modules.
 appId: stemn.stemn

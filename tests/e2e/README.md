@@ -7,11 +7,11 @@ Playwright (Chromium) tests of the website's core flows against a real Stemn bac
 local/start.sh && local/seed.sh          # API :3000, websocket :8000
 
 # 2. from the repo root: production build against the local backend, then the tests
-STEMN_ENV=local npm run build
-npm run test:e2e                         # serves build/ on :8081 (E2E_PORT=... to change)
+STEMN_ENV=local pnpm run build
+pnpm run test:e2e                         # serves build/ on :8081 (E2E_PORT=... to change)
 
 # or against a running dev server / deployment
-E2E_BASE_URL=http://localhost:8081 npm run test:e2e
+E2E_BASE_URL=http://localhost:8081 pnpm run test:e2e
 ```
 
 | Variable | Default | Meaning |
@@ -37,7 +37,7 @@ the CubeSat project, opens the file, picks **Compare: Unified Diff** and the two
 viewer: the five class counts, the entity panel, the four change colours on the canvas, the A → B slider, the entity details and
 the side-by-side view with linked cameras. It needs a backend with the diff route (stemn-backend ADR-022) and the OpenCascade
 converter.
-On failure, traces, screenshots and videos are in `test-results/` (`npx playwright show-trace <trace.zip>`).
+On failure, traces, screenshots and videos are in `test-results/` (`pnpm exec playwright show-trace <trace.zip>`).
 
 In CI the reusable workflow `.github/workflows/e2e.yml` starts the backend with the composite action
 `.github/actions/stemn-backend` and runs this suite and the desktop suite (under xvfb).

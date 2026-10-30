@@ -16,25 +16,27 @@ This repo contains all of Stemn's frontend code.
 
 ## Requirements
 
-* Node.js 24 (`.nvmrc`, what CI and the Docker image use; 22.22+ works) and npm 10+
+* Node.js 24 (`.nvmrc`, what CI and the Docker image use; 22.22+ works) and pnpm 12: `corepack enable` provides the
+  version pinned in `package.json` (`packageManager`)
 
 ## Usage
 
-The repo root is an [npm workspace](https://docs.npmjs.com/cli/using-npm/workspaces) containing
+The repo root is a [pnpm workspace](https://pnpm.io/workspaces) (`pnpm-workspace.yaml`) containing
 `stemn-frontend-shared`, `stemn-frontend-website`, `stemn-frontend-desktop` and `tests/e2e`. There is a single
-`package-lock.json` at the root.
+`pnpm-lock.yaml` at the root. Versions used by more than one package live in the `catalog:` of `pnpm-workspace.yaml`.
+`node_modules` is pnpm's isolated layout: a package can only import what its own `package.json` declares.
 
 ```sh
-npm install          # install everything (run at the repo root)
-npm run dev          # website: Vite dev server with React Fast Refresh on http://localhost:8081
-npm run build        # website: Vite production build -> stemn-frontend-website/build
-npm run serve        # serve the production build on http://localhost:8081 (PORT=... to change)
-npm run dev:webpack  # website: the webpack 5 fallback dev server (same port)
-npm run build:webpack # website: the webpack 5 fallback production build (same output dir)
-npm run typecheck    # tsc --noEmit: website, desktop, e2e (type errors never block the builds)
-npm run lint         # ESLint (--max-warnings 0) + Prettier check; npm run lint:fix / npm run format fix them
-npm test             # unit tests (Vitest)
-npm run test:e2e     # website end-to-end tests (Playwright) against the local backend, see tests/e2e/README.md
+pnpm install          # install everything (run at the repo root)
+pnpm run dev          # website: Vite dev server with React Fast Refresh on http://localhost:8081
+pnpm run build        # website: Vite production build -> stemn-frontend-website/build
+pnpm run serve        # serve the production build on http://localhost:8081 (PORT=... to change)
+pnpm run dev:webpack  # website: the webpack 5 fallback dev server (same port)
+pnpm run build:webpack # website: the webpack 5 fallback production build (same output dir)
+pnpm run typecheck    # tsc --noEmit: website, desktop, e2e (type errors never block the builds)
+pnpm run lint         # ESLint (--max-warnings 0) + Prettier check; pnpm run lint:fix / pnpm run format fix them
+pnpm test             # unit tests (Vitest)
+pnpm run test:e2e     # website end-to-end tests (Playwright) against the local backend, see tests/e2e/README.md
 ```
 
 The website talks to the Stemn backend. By default (`STEMN_ENV=local`) it expects the API on
@@ -69,7 +71,7 @@ local/seed.sh                                 # all demo accounts use the passwo
                                               # e.g. ada.lovelace@stemn.local, priya.raman@stemn.local
 
 # 3. website
-cd ../stemn-frontend && npm install && npm run dev   # http://localhost:8081
+cd ../stemn-frontend && pnpm install && pnpm run dev   # http://localhost:8081
 ```
 
 Port 8080 is deliberately avoided because the development container's noVNC server listens there.
@@ -80,12 +82,12 @@ The Electron app lives in [stemn-frontend-desktop](./stemn-frontend-desktop) (El
 electron-vite 6 / Vite 8, React 19, the same shared code as the website). From the repo root:
 
 ```sh
-npm run desktop:dev        # main + preload in watch mode, renderer dev server with Fast Refresh, launches Electron
-npm run desktop:build      # production build -> stemn-frontend-desktop/dist (STEMN_ENV=production unless set)
-npm run desktop:start      # run the built app
-npm run desktop:package    # Linux AppImage + unpacked dir -> stemn-frontend-desktop/release
-npm run desktop:test:e2e   # Playwright + Electron end-to-end test against the local backend (needs a display)
-npm run desktop:typecheck
+pnpm run desktop:dev        # main + preload in watch mode, renderer dev server with Fast Refresh, launches Electron
+pnpm run desktop:build      # production build -> stemn-frontend-desktop/dist (STEMN_ENV=production unless set)
+pnpm run desktop:start      # run the built app
+pnpm run desktop:package    # Linux AppImage + unpacked dir -> stemn-frontend-desktop/release
+pnpm run desktop:test:e2e   # Playwright + Electron end-to-end test against the local backend (needs a display)
+pnpm run desktop:typecheck
 ```
 
 `desktop:dev` talks to the local backend (`STEMN_ENV=local`: API :3000, websocket :8000). On Linux the

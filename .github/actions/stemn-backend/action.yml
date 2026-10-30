@@ -31,6 +31,16 @@ runs:
         path: ${{ inputs.path }}
         ssh-key: ${{ inputs.ssh-key }}
         persist-credentials: false
+    # local/start.sh installs the backend's dependencies with pnpm: make sure there is one on the PATH
+    # (a calling workflow may have set it up already; pnpm switches to the backend's packageManager version)
+    - name: Is pnpm on the PATH
+      id: pnpm
+      shell: bash
+      run: echo "found=$(command -v pnpm > /dev/null && echo true || echo false)" >> "$GITHUB_OUTPUT"
+    - uses: pnpm/action-setup@v6
+      if: steps.pnpm.outputs.found != 'true'
+      with:
+        package_json_file: ${{ inputs.path }}/package.json
     - name: Cache the backend dependencies and builds
       uses: actions/cache@v6
       with:
@@ -41,9 +51,9 @@ runs:
           ${{ inputs.path }}/libraries/*/build
           ${{ inputs.path }}/services/api/build
           ${{ inputs.path }}/services/websocket-server/build
-        key: stemn-backend-${{ runner.os }}-${{ hashFiles(format('{0}/package-lock.json', inputs.path)) }}-${{ hashFiles(format('{0}/libraries/**/src/**', inputs.path), format('{0}/services/api/src/**', inputs.path), format('{0}/services/websocket-server/src/**', inputs.path)) }}
+        key: stemn-backend-pnpm-${{ runner.os }}-${{ hashFiles(format('{0}/pnpm-lock.yaml', inputs.path)) }}-${{ hashFiles(format('{0}/libraries/**/src/**', inputs.path), format('{0}/services/api/src/**', inputs.path), format('{0}/services/websocket-server/src/**', inputs.path)) }}
         restore-keys: |
-          stemn-backend-${{ runner.os }}-${{ hashFiles(format('{0}/package-lock.json', inputs.path)) }}-
+          stemn-backend-pnpm-${{ runner.os }}-${{ hashFiles(format('{0}/pnpm-lock.yaml', inputs.path)) }}-
     - uses: docker/setup-buildx-action@v4
     - name: Build the CAD converter image
       # local/start.sh runs it (stemn-cad-converter:local) and would build it without a cache

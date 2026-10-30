@@ -1,7 +1,7 @@
 /**
  * Stemn Desktop end-to-end test (Electron 45 + the local Stemn backend).
  *
- *   npm run test:e2e        (builds with STEMN_ENV=local first; E2E_SKIP_BUILD=1 to reuse dist/)
+ *   pnpm run test:e2e        (builds with STEMN_ENV=local first; E2E_SKIP_BUILD=1 to reuse dist/)
  *
  * Requires the backend from stemn-backend/local (API :3000, websocket :8000) with the
  * seed data, and an X display (DISPLAY, default :1). Screenshots go to qa/.

@@ -8,7 +8,7 @@ import { defineConfig, devices } from '@playwright/test'
  *
  * Without E2E_BASE_URL the production build (stemn-frontend-website/build, built with
  * STEMN_ENV=local) is served with the website's express server. Build it first:
- *   STEMN_ENV=local npm run build && npm run test:e2e
+ *   STEMN_ENV=local pnpm run build && pnpm run test:e2e
  */
 const port = Number(process.env.E2E_PORT) || 8081
 const baseURL = process.env.E2E_BASE_URL || `http://localhost:${port}`

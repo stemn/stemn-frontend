@@ -1,4 +1,4 @@
-// webpack 5 FALLBACK build (npm run dev:webpack / build:webpack). The primary toolchain is Vite
+// webpack 5 FALLBACK build (pnpm run dev:webpack / build:webpack). The primary toolchain is Vite
 // (../vite.config.ts); this config follows the same conventions and is kept working until the
 // webpack fallback is retired (see docs/DECISIONS.md).
 // Common configuration used by webpack.config.development and webpack.config.production.
@@ -67,7 +67,9 @@ module.exports = ({ mode, styleLoader, refresh = false }) => {
       clean: true,
     },
     resolve: {
-      symlinks: false,
+      // pnpm links every package into node_modules/.pnpm: follow the links (webpack's default) so a
+      // package finds its own dependencies and peers next to it
+      symlinks: true,
       alias: {
         'stemn-shared': join(sharedRoot, 'src'),
         theme$: join(root, 'src/client/assets/styles/modules/theme.module.css'),

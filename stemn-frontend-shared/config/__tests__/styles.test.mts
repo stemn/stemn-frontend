@@ -4,7 +4,7 @@
  *    `@value x from "theme"` resolved through the alias
  *  - every other stylesheet is global: names untouched, side-effect imports kept
  *  - node_modules css is global
- * Run with `npm test` (Vitest).
+ * Run with `pnpm test` (Vitest).
  */
 import { test } from 'vitest'
 import assert from 'node:assert/strict'

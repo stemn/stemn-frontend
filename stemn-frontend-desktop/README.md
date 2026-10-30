@@ -14,30 +14,30 @@ precedence over the generic ones).
 
 ## Requirements
 
-* Node.js 22.22+ (Node 24 is what CI/dev use) and npm 10+ (npm 11 works)
-* Run `npm install` **at the repo root**. There is one lockfile for all packages.
+* Node.js 22.22+ (Node 24 is what CI/dev use) and pnpm 12 (`corepack enable`)
+* Run `pnpm install` **at the repo root**. There is one lockfile for all packages.
 * Linux: the usual Electron runtime libraries (`libnss3`, `libgtk-3-0`, `libxss1`, `libasound2`, ...).
   If Electron aborts with *"The SUID sandbox helper binary was found, but is not configured correctly"*,
   fix the sandbox helper once:
-  `sudo chown root:root node_modules/electron/dist/chrome-sandbox && sudo chmod 4755 node_modules/electron/dist/chrome-sandbox`
+  `sandbox=$(realpath stemn-frontend-desktop/node_modules/electron/dist/chrome-sandbox) && sudo chown root:root "$sandbox" && sudo chmod 4755 "$sandbox"`
   (run from the repo root; repeat after reinstalling Electron). Don't disable the sandbox.
 * A Stemn backend. `STEMN_ENV=local` (the default for `dev`) expects the API on http://localhost:3000 and the
   websocket server on http://localhost:8000, see `stemn-backend/local/README.md`.
 
 ## Commands
 
-Run them from this folder, or from the repo root with the `desktop:` prefix (`npm run desktop:dev`, ...).
+Run them from this folder, or from the repo root with the `desktop:` prefix (`pnpm run desktop:dev`, ...).
 
 | Command | What it does |
 | --- | --- |
-| `npm run dev` | Builds main + preload in watch mode (into `out/`, so it never mixes with a production `dist/`), starts the renderer dev server (Vite, React Fast Refresh) on :5173 and launches Electron. Main/preload changes restart Electron. |
-| `npm run build` | Production build into `dist/` (`dist/main`, `dist/preload`, `dist/renderer`). |
-| `npm run start` | Runs the built app from `dist/` (no rebuild). |
-| `npm run package` | Builds and packages a Linux AppImage plus an unpacked dir into `release/` (electron-builder). |
-| `npm run package:win` / `package:mac` | Windows NSIS installer / macOS dmg+zip. Run them on that OS (Windows from Linux needs wine). |
-| `npm run package:check` | Validates `electron-builder.yml` for all platforms without building. |
-| `npm run test:e2e` | End-to-end test with Playwright driving Electron against the local backend (see below). |
-| `npm run typecheck` | `tsc --noEmit` for the app, the shared desktop code, the tests and the build config. |
+| `pnpm run dev` | Builds main + preload in watch mode (into `out/`, so it never mixes with a production `dist/`), starts the renderer dev server (Vite, React Fast Refresh) on :5173 and launches Electron. Main/preload changes restart Electron. |
+| `pnpm run build` | Production build into `dist/` (`dist/main`, `dist/preload`, `dist/renderer`). |
+| `pnpm run start` | Runs the built app from `dist/` (no rebuild). |
+| `pnpm run package` | Builds and packages a Linux AppImage plus an unpacked dir into `release/` (electron-builder). |
+| `pnpm run package:win` / `package:mac` | Windows NSIS installer / macOS dmg+zip. Run them on that OS (Windows from Linux needs wine). |
+| `pnpm run package:check` | Validates `electron-builder.yml` for all platforms without building. |
+| `pnpm run test:e2e` | End-to-end test with Playwright driving Electron against the local backend (see below). |
+| `pnpm run typecheck` | `tsc --noEmit` for the app, the shared desktop code, the tests and the build config. |
 
 `dev`, `build` and `start` go through `scripts/electron-vite.mjs`, which removes `ELECTRON_RUN_AS_NODE`
 from the environment: some tools (editor terminals that are themselves Electron apps) export it, and it
@@ -47,7 +47,7 @@ makes the Electron binary start as plain Node.
 
 | Variable | Used by | Meaning |
 | --- | --- | --- |
-| `STEMN_ENV` | build / dev | `local` (dev default), `staging`, `production` (build default) or `custom` ([stemn-frontend-shared/config/stemnEnv.cjs](../stemn-frontend-shared/config/stemnEnv.cjs)). Baked into `GLOBAL_ENV.API_SERVER` / `WEBSOCKET_SERVER` / `WEBSITE_URL`. E.g. `STEMN_ENV=local npm run build`. |
+| `STEMN_ENV` | build / dev | `local` (dev default), `staging`, `production` (build default) or `custom` ([stemn-frontend-shared/config/stemnEnv.cjs](../stemn-frontend-shared/config/stemnEnv.cjs)). Baked into `GLOBAL_ENV.API_SERVER` / `WEBSOCKET_SERVER` / `WEBSITE_URL`. E.g. `STEMN_ENV=local pnpm run build`. |
 | `API_SERVER`, `WEBSOCKET_SERVER`, `WEBSITE_URL` | build | Server urls for `STEMN_ENV=custom`. |
 | `SENTRY_DSN` | build | Enables Sentry (`@sentry/browser`) in the renderers, like the website. |
 | `STEMN_DESKTOP_DEV_PORT` | dev | Renderer dev server port (default 5173). |
@@ -123,8 +123,8 @@ messages, window controls, a folder picker, and `shell` open/reveal. Each call m
 
 ```sh
 # backend running with the seed data (stemn-backend: local/start.sh && local/seed.sh), X display available
-npm run test:e2e                      # builds with STEMN_ENV=local, then runs tests/e2e.spec.ts
-E2E_SKIP_BUILD=1 npm run test:e2e     # reuse dist/
+pnpm run test:e2e                      # builds with STEMN_ENV=local, then runs tests/e2e.spec.ts
+E2E_SKIP_BUILD=1 pnpm run test:e2e     # reuse dist/
 ```
 
 It launches the built app with a throwaway profile, logs in as `priya.raman@stemn.local`, and checks:
@@ -142,6 +142,6 @@ the edit as a new revision; everything after that is the app. Each run adds one 
 icons from `build/` (`icon.ico`, `icon.icns`, `icons/*.png`), the `stemn://` protocol, and a GitHub
 `publish` provider (`Stemn/Stemn-Desktop`) that electron-updater uses for auto updates.
 
-Releases need a CI job per OS running `npm run package:<os>` with signing credentials and `--publish always`
+Releases need a CI job per OS running `pnpm run package:<os>` with signing credentials and `--publish always`
 (GitHub token). That pipeline does not exist yet; the plan is in
 [docs/plans/desktop-auto-update-and-signing.md](../docs/plans/desktop-auto-update-and-signing.md).

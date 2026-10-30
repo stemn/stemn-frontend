@@ -1,7 +1,7 @@
 // ESLint 10 flat config for the whole monorepo (website, shared, desktop, e2e tests, build configs).
 //
-//   npm run lint        eslint + prettier --check
-//   npm run lint:fix    eslint --fix + prettier --write
+//   pnpm run lint        eslint + prettier --check
+//   pnpm run lint:fix    eslint --fix + prettier --write
 //
 // Formatting is Prettier's job (eslint-config-prettier switches off the stylistic rules).
 // Rules that the legacy code base violates in bulk are switched off below with a reason;

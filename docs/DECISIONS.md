@@ -9,8 +9,8 @@ Each entry states the context, the decision and its consequences. Newer entries 
 * Context: the website was on webpack 5 + Babel 8. The desktop app had already moved to electron-vite 6 / Vite 8.
   Vite 8 (Rolldown + Oxc) builds the website in about 5 s, where webpack takes about 68 s. It also gives native ESM
   dev with React Fast Refresh and is the current ecosystem default.
-* Decision: `npm run dev` / `npm run build` use Vite. The webpack 5 configs stay working behind `npm run dev:webpack` /
-  `npm run build:webpack`, and CI builds both on every PR. The git tag `webpack5-fallback` marks the last webpack-only commit.
+* Decision: `pnpm run dev` / `pnpm run build` use Vite. The webpack 5 configs stay working behind `pnpm run dev:webpack` /
+  `pnpm run build:webpack`, and CI builds both on every PR. The git tag `webpack5-fallback` marks the last webpack-only commit.
 * Consequences: the fallback needs a few webpack-only artefacts: `config/webpack.config.*.js`, Babel inside babel-loader,
   css-loader, and `*.webpack.js` modules for Vite-only APIs (`fileTypeIcons.webpack.js` replaces `import.meta.glob` with
   `require.context`). Renovate groups these dependencies. **Retiring the fallback** means deleting those files, the
@@ -108,3 +108,22 @@ Each entry states the context, the decision and its consequences. Newer entries 
   - Formats the backend cannot diff (proprietary CAD, Autodesk-converted deployments) keep the original side-by-side previews and
     say so.
 
+## ADR-010: pnpm 12 instead of npm workspaces, isolated node_modules
+
+* Status: proposed (the pnpm migration PR, together with stemn-backend's and stemn-marketing's)
+* Context: the three Stemn repositories each used npm with its own conventions. npm's flat, hoisted `node_modules`
+  let any package import anything another package declared, so several imports only worked by accident.
+* Decision: pnpm 12 (the `packageManager` version, through corepack) with its default isolated `node_modules`: no
+  `nodeLinker: hoisted`, `shamefullyHoist` or `publicHoistPattern`. `pnpm-workspace.yaml` holds the packages, the
+  settings npm kept in `.npmrc` and `package.json` (`saveExact`, `overrides`), `allowBuilds` (which dependency install
+  scripts run) and a `catalog:` for the versions more than one package uses. `pnpm-lock.yaml` was imported from
+  `package-lock.json` with the same 1233 package versions.
+* Electron: the desktop app bundles everything into `dist/` and ships no `node_modules` (`npmRebuild: false`,
+  `files: dist/**`), so electron-builder 26 (which detects pnpm and collects only production dependencies, here none)
+  packages it without hoisting. An app that shipped `node_modules` in its asar would need `nodeLinker: hoisted`.
+* Consequences:
+  * Every package declares what it imports. `stemn-frontend-shared` now lists the desktop-only modules its
+    `src/desktop` code imports, the `@types/*` the apps typecheck it with and `vite` for its config tests; it also
+    provides recharts' `react-is` peer (pnpm would otherwise have bound React 18's react-is).
+  * The webpack fallback follows symlinks again (`resolve.symlinks`), which pnpm's layout needs.
+  * Install scripts are opt-in: an unlisted one fails `pnpm install` until it is added to `allowBuilds`.

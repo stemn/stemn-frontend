@@ -12,27 +12,28 @@
   ],
   "engines": {
     "node": ">=22.22.0",
-    "npm": ">=10"
+    "pnpm": ">=12"
   },
+  "packageManager": "pnpm@12.16.1",
   "scripts": {
-    "dev": "npm run dev --workspace stemn-frontend-website",
-    "build": "npm run build --workspace stemn-frontend-website",
-    "serve": "npm run serve --workspace stemn-frontend-website",
-    "dev:webpack": "npm run dev:webpack --workspace stemn-frontend-website",
-    "build:webpack": "npm run build:webpack --workspace stemn-frontend-website",
+    "dev": "pnpm --filter stemn-frontend-website run dev",
+    "build": "pnpm --filter stemn-frontend-website run build",
+    "serve": "pnpm --filter stemn-frontend-website run serve",
+    "dev:webpack": "pnpm --filter stemn-frontend-website run dev:webpack",
+    "build:webpack": "pnpm --filter stemn-frontend-website run build:webpack",
     "lint": "eslint . --max-warnings 0 && prettier --check .",
     "lint:fix": "eslint . --fix && prettier --write .",
     "format": "prettier --write .",
-    "typecheck": "npm run typecheck --workspace stemn-frontend-website && npm run typecheck --workspace stemn-frontend-desktop && tsc -p tests/e2e/tsconfig.json --noEmit",
+    "typecheck": "pnpm --filter stemn-frontend-website run typecheck && pnpm --filter stemn-frontend-desktop run typecheck && tsc -p tests/e2e/tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "npm test --workspace stemn-e2e",
-    "desktop:dev": "npm run dev --workspace stemn-frontend-desktop",
-    "desktop:build": "npm run build --workspace stemn-frontend-desktop",
-    "desktop:start": "npm run start --workspace stemn-frontend-desktop",
-    "desktop:package": "npm run package --workspace stemn-frontend-desktop",
-    "desktop:test:e2e": "npm run test:e2e --workspace stemn-frontend-desktop",
-    "desktop:typecheck": "npm run typecheck --workspace stemn-frontend-desktop",
+    "test:e2e": "pnpm --filter stemn-e2e test",
+    "desktop:dev": "pnpm --filter stemn-frontend-desktop run dev",
+    "desktop:build": "pnpm --filter stemn-frontend-desktop run build",
+    "desktop:start": "pnpm --filter stemn-frontend-desktop run start",
+    "desktop:package": "pnpm --filter stemn-frontend-desktop run package",
+    "desktop:test:e2e": "pnpm --filter stemn-frontend-desktop run test:e2e",
+    "desktop:typecheck": "pnpm --filter stemn-frontend-desktop run typecheck",
     "prepare": "husky"
   },
   "repository": {
@@ -43,14 +44,6 @@
     "url": "https://github.com/stemn/stemn-frontend/issues"
   },
   "homepage": "https://github.com/stemn/stemn-frontend#readme",
-  "overrides": {
-    "react": "19.3.1",
-    "react-dom": "19.3.1",
-    "katex": "0.19.1",
-    "ansi-to-react": {
-      "linkify-it": "5.0.2"
-    }
-  },
   "devDependencies": {
     "@eslint-react/eslint-plugin": "5.28.8",
     "@eslint/js": "10.0.1",
@@ -65,7 +58,9 @@
     "jsdom": "30.1.3",
     "lint-staged": "17.6.0",
     "prettier": "3.9.10",
+    "typescript": "6.0.3",
     "typescript-eslint": "8.72.1",
+    "vite": "catalog:",
     "vitest": "5.0.5"
   },
   "lint-staged": {
