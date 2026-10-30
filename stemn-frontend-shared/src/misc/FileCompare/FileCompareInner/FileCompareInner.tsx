@@ -1,9 +1,10 @@
 import cn from 'classnames'
 import * as React from 'react'
-import { isCadFile, isPcbFile } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
+import { isDiffableFile, isGcodeFile, isPcbFile } from 'stemn-shared/misc/FileCompare/FileCompare.utils.js'
 import { IFileCompareMode } from 'stemn-shared/misc/FileCompare/types'
 import DxfDiffLoader from 'stemn-shared/misc/FileDiff/DxfDiffLoader'
 import FileDiffLoader from 'stemn-shared/misc/FileDiff/FileDiffLoader'
+import GcodeDiffLoader from 'stemn-shared/misc/FileDiff/GcodeDiffLoader'
 import PcbDiffLoader from 'stemn-shared/misc/FileDiff/PcbDiffLoader'
 import { IFile } from 'stemn-shared/misc/FileList/types'
 import { PreviewFile } from 'stemn-shared/misc/Files/PreviewFile'
@@ -70,11 +71,17 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
     const { file1, file2, mode } = this.props
 
     // two revisions of a CAD file: the diff viewer (lazy chunk), unified or side by side with synchronised cameras;
-    // 2D drawings (DXF, DWG) in the 2D diff viewer, without three.js. both fall back to the plain side-by-side
-    // comparison below for formats the API cannot diff
-    if (file1 && file2 && (mode === 'unified' || mode === 'sideBySide') && (isCadFile(file1) || isPcbFile(file1))) {
-      // PCB and electronics files (KiCad, Eagle, Gerber, Excellon) in the same 2D diff viewer
-      const DiffLoader = isPcbFile(file1) ? PcbDiffLoader : isDrawingFile(file1) ? DxfDiffLoader : FileDiffLoader
+    // 2D drawings (DXF, DWG) and PCB and electronics files (KiCad, Eagle, Gerber, Excellon) in the 2D diff viewer, without
+    // three.js; G-code in the layer diff viewer. all fall back to the plain side-by-side comparison below for formats the
+    // API cannot diff
+    if (file1 && file2 && (mode === 'unified' || mode === 'sideBySide') && isDiffableFile(file1)) {
+      const DiffLoader = isPcbFile(file1)
+        ? PcbDiffLoader
+        : isGcodeFile(file1)
+          ? GcodeDiffLoader
+          : isDrawingFile(file1)
+            ? DxfDiffLoader
+            : FileDiffLoader
       return (
         <div className="layout-column flex">
           <DiffLoader file1={file1} file2={file2} view={mode} renderFallback={() => this.renderCompare('sideBySide')} />
@@ -82,7 +89,7 @@ export class FileCompareInner extends React.Component<IFileCompareInnerProps, IF
       )
     }
 
-    // unified diffs are for CAD and PCB files; anything else in that mode is shown side by side
+    // unified diffs are for CAD, PCB and G-code files; anything else in that mode is shown side by side
     return this.renderCompare(mode === 'unified' ? (file2 ? 'sideBySide' : 'single') : mode)
   }
   public renderCompare(mode: Exclude<IFileCompareMode, 'unified'>) {

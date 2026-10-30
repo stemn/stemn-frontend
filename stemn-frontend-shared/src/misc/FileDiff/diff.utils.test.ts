@@ -155,6 +155,19 @@ describe('filters and the entity panel', () => {
     expect(formatDelta(volume, 'mm3')).toBe('-301.6 mm³')
     expect(formatValue([100, 60, 6], 'mm')).toBe('100 × 60 × 6 mm')
     expect(formatValue(null)).toBe('–')
+    expect(formatValue({ 'outer-wall': 75.139, 'solid-infill': 124.25 }, 'mm')).toBe(
+      'outer-wall 75.139 mm, solid-infill 124.25 mm',
+    )
+    expect(formatValue('#A0A4A8')).toBe('#A0A4A8')
+  })
+
+  it('lists layers in number order', () => {
+    const layer = (label: string) => ({ ...entity('nut'), id: label, label })
+    const rows = panelEntities([layer('Layer 10'), layer('Layer 2'), layer('Layer 1')], {
+      ...defaultFilters,
+      unchanged: true,
+    })
+    expect(rows.map((row) => row.label)).toEqual(['Layer 1', 'Layer 2', 'Layer 10'])
   })
 })
 

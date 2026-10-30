@@ -64,8 +64,16 @@ export class PreviewFileComponent extends React.Component<IPreviewFileComponentP
         return <PreviewPcbLoader previewId={previewId} fileMeta={file} />
       } else if (viewerType === 'code') {
         return <PreviewCode previewId={previewId} fileMeta={file} fileData={singleFileData} downloadFn={getFile} />
-      } else if (viewerType === 'autodesk') {
-        return <PreviewCadSwitch previewId={previewId} fileMeta={file} fileRender={fileRender} renderFn={renderFn} />
+      } else if (viewerType === 'autodesk' || viewerType === 'gcode') {
+        return (
+          <PreviewCadSwitch
+            previewId={previewId}
+            fileMeta={file}
+            fileRender={fileRender}
+            renderFn={renderFn}
+            toolpath={viewerType === 'gcode'}
+          />
+        )
       } else if (viewerType === 'google') {
         return <PreviewGoogle previewId={previewId} fileMeta={file} />
       } else if (viewerType === 'gdoc') {

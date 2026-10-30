@@ -2,7 +2,8 @@
 
 How Stemn shows what changed between two revisions of a file, and what a new file type has to provide to get the same
 viewer. The product plan is [`plans/file-diff-viewers.md`](plans/file-diff-viewers.md); this document is the contract that
-workstream A (diff core + 3D CAD) delivered and that workstreams B to E (PCB, AEC, additive, simulation) build on.
+workstream A (diff core + 3D CAD) delivered and that workstreams B to E (PCB, AEC, additive, simulation) build on; PCB (B), AEC (C)
+and additive (D) are built (below).
 
 ## The pieces
 
@@ -94,7 +95,8 @@ The `?` button in the toolbar lists them too (`diffShortcuts`). They are ignored
 
 `FileCompare`: for CAD files (`getViewerType` `autodesk`, which includes IFC, DXF and DWG) the compare menu offers **Compare:
 Unified Diff**, and with two revisions selected both the unified and the side-by-side modes open the diff viewer
-(`FileCompareInner`): `FileDiffView` for models, `DxfDiffView` for drawings (`isDrawingFile`). Files the API cannot
+(`FileCompareInner`): `FileDiffView` for models (3MF included), `DxfDiffView` for drawings (`isDrawingFile`). G-code
+(`getViewerType` `gcode`) opens in `GcodeDiffView` the same way (`isGcodeFile`). Files the API cannot
 diff fall back to the original side-by-side previews with a notice. In the commit and changes views (`FileCompare` with two revisions), CAD files open in the unified mode.
 
 PCB and electronics files (`getViewerType` `pcb`: KiCad `.kicad_pcb`/`.kicad_sch`, Eagle `.brd`, Gerber layers, Excellon drill
@@ -226,9 +228,42 @@ this:
 * **Previews:** `SvgDiffCanvas` without a manifest draws a plain preview (`PreviewDrawing`).
 * **Safety:** SVGs are sanitised on parse.
 
+## Additive manufacturing (workstream D, built)
+
+stemn-backend ADR-026 and stemn-frontend ADR-012. Both formats convert in `services/cad-converter`.
+
+* **3MF** (`additive` adapter): one entity per build item (`kind: 'object'`), id the object's name (`foot#1`, `foot#2` when one
+  object is placed twice), the item's transform in its glTF node, `geometryHash` an exact hash of the object's triangles in its
+  own frame, `attributes` `material`, `colour`, `type`, `partNumber`, `components` and the derived `objectId`, `triangles`,
+  `volume`, `area`, `size`. The glTF diff viewer draws it unchanged; the entity details read the material and colour from the
+  node's `extras.stemn`.
+* **G-code** (`gcode` adapter): one entity per layer (`kind: 'layer'`), id its height above the first layer (`layer:z+1.200`, so
+  an inserted or removed layer renames no other), `transform` a translation to the lowest corner of its extrusions at its z,
+  `bounds` in millimetres in the printer's frame (`units.length: 'mm'`), no signature (matched by id only), `payloadRef:
+  { layer }` (the index in `toolpath.bin`). `FileDiff/GcodeDiffView` (its own lazy chunk, from `FileCompareInner` for G-code)
+  loads both toolpaths with `useDiffLoad`, keeps the shared toolbar, state and entity panel, and draws with
+  `PreviewGcode/ToolpathDiff`, which calls `unifiedAppearance` per layer and
+  styles that layer's line set, moves B's layer by `-(1 - placement) × move.translation`, and for a selected modified layer
+  compares A's and B's moves (`compareLayers`, 10 µm) and draws the ones only A has in the removed colour and only B has in the
+  added colour.
+* Fixtures: stemn-backend `core/__tests__/samples/additive` (copied to `tests/e2e/fixtures/additive`), with `samples.json`.
+
+### What the other workstreams should know
+
+* `IDiffEntity` carries the deltas, not the entity's own attributes: a viewer that wants to show unchanged properties (a 3MF
+  material, IFC property sets) reads them from its render (here the glTF node's `extras.stemn`), or the contract grows an
+  `attributes` field.
+* The engine pairs entities with different ids by shape and position; identical shapes at another position become **moved**.
+  For ordered, stacked entities (layers, sheets, storeys) set `signature: null` and put the position in the `geometryHash` or
+  the id, or a removed and an added entity of the same shape read as one moved entity.
+* Attributes whose only change follows a placement (`z`, `height`) must be in `derived`, or every moved entity reads as modified.
+* `formatValue` shows objects of numbers as `name value, ...`; units other than `mm`, `mm2` and `mm3` (`s`, `mm/s`) print as
+  given. The panel sorts labels in number order.
+* The 3MF material shows through `DiffEntityPanel`'s `details` prop; a viewer's own per-entity details go there.
+
 ## Not done yet
 
-* Workstreams D and E (the additive and simulation adapters and viewers).
+* Workstream E (the simulation adapters and viewers).
 * IFC and drawings: the limits in stemn-backend `docs/FUTURE-WORK.md` (spaces and openings, linetypes, fonts, layouts, xrefs,
   `<use>` for blocks, AutoCAD-written DWG).
 * PCB: diffs of a folder's Gerber files shown as one board (they have no revisions of their own: diff a zip of the set, or each

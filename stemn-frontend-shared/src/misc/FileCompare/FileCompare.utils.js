@@ -43,6 +43,8 @@ const iconMap = {
 const compareModeTable = {
   gerber: [0, 1, 2, 3, 4],
   code: [0, 1, 4],
+  // G-code: the unified diff of the layers (FileDiff, the toolpath view), or side by side
+  gcode: [5, 0, 1, 4],
   // CAD: the unified diff (FileDiff) for the formats the API diffs, the rest fall back to side by side there
   autodesk: [5, 0, 1, 2, 3, 4],
   google: [0, 1, 4],
@@ -69,6 +71,12 @@ export const isCadFile = (file) => Boolean(file && file.name) && getViewerType(f
 
 // PCB and electronics files (the 'pcb' viewer type: KiCad, Eagle, Gerber, Excellon) compare in the 2D diff viewer
 export const isPcbFile = (file) => Boolean(file && file.name) && getViewerType(file.name, file.provider) === 'pcb'
+
+// G-code compares in the layer diff viewer
+export const isGcodeFile = (file) => Boolean(file && file.name) && getViewerType(file.name, file.provider) === 'gcode'
+
+// the files the diff viewers compare: CAD files, PCB and electronics files and G-code toolpaths
+export const isDiffableFile = (file) => isCadFile(file) || isPcbFile(file) || isGcodeFile(file)
 
 export const orderItemsByTime = (mode, item1, item2) => {
   if (mode === 'single' || !item2) {
