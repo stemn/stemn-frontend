@@ -1,0 +1,136 @@
+/* E, Workspace: the top bar becomes a sidebar. Warm paper, serif titles, a deep green accent. */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block');
+:root {
+  --font: 'Instrument Sans', sans-serif;
+  --font-display: 'Newsreader', serif;
+  --font-reading: 'Newsreader', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --bg: #f8f6f1;
+  --surface: #fffefb;
+  --surface-2: #f3f0e9;
+  --border: #e9e5db;
+  --border-strong: #dcd7ca;
+  --text: #2a2722;
+  --text-2: #57524a;
+  --text-3: #8d8778;
+  --accent: #1f6f54;
+  --accent-hover: #185a44;
+  --accent-text: #ffffff;
+  --accent-soft: rgba(31, 111, 84, 0.14);
+  --link: #1f6f54;
+  --danger: #c2410c;
+  --tab-active: #1f6f54;
+  --nav-bg: #f1eee6;
+  --nav-border: #e4dfd3;
+  --nav-active: #e5e1d6;
+  --nav-field-bg: #fffefb;
+  --nav-field-border: #e4dfd3;
+  --nav-icon: #7a7468;
+  --header-bg: transparent;
+  --header-border: #e9e5db;
+  --table-head: #faf8f3;
+  --tag-bg: #ece8dd;
+  --tag-border: transparent;
+  --tag-text: #57524a;
+  --tag-radius: 6px;
+  --radius-s: 6px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+  --avatar-radius: 8px;
+  --heat-radius: 2px;
+  --control-h: 34px;
+  --page-width: 1120px;
+  --scrim: rgba(42, 39, 34, 0.35);
+  --shadow-pop: 0 18px 44px -12px rgba(42, 39, 34, 0.26);
+  --login-bg: linear-gradient(#f1eee6, #f8f6f1);
+  --login-shadow: 0 0 0 1px #e4dfd3, 0 30px 70px -28px rgba(42, 39, 34, 0.3);
+  --title-size: 30px;
+  --title-weight: 500;
+  --title-tracking: -0.015em;
+  --viewer-bg: linear-gradient(#faf8f3, #ebe7dd);
+  --row-h: 44px;
+}
+/* @rules */
+/* The shell: the header is pulled out of the flow and the page makes room for it */
+div:has(> .Header_header) {
+  position: relative;
+  padding-left: 236px;
+  min-height: 100vh;
+}
+.Header_header {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 236px;
+  border-bottom: none;
+  border-right: 1px solid #e4dfd3;
+  z-index: 5;
+}
+.Header_inner {
+  flex-flow: row wrap;
+  align-items: center;
+  align-content: flex-start;
+  height: auto;
+  max-width: none;
+  padding: 12px 12px 12px 14px;
+}
+.Header_logo {
+  height: 32px;
+}
+/* Logo and account actions share the first row; search and links run full width below */
+.Header_inner > .flex {
+  display: none;
+}
+.Header_inner > div:last-child {
+  order: 1;
+  margin-left: auto;
+}
+.Header_inner > div:last-child .SimpleIconButton_button {
+  padding: 3px;
+}
+.Header_search {
+  order: 2;
+  width: 100%;
+  margin-top: 14px;
+}
+.SiteSearch_search {
+  margin-left: 0;
+}
+.Header_links {
+  order: 3;
+  width: 100%;
+  margin: 10px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+.Header_link {
+  display: block;
+  padding: 7px 10px;
+}
+.SubHeader_title {
+  padding: 22px 0 16px;
+}
+.ProjectThread_title {
+  font-size: 30px;
+}
+.Button_button.primary {
+  font-weight: 600;
+}
+.FeaturedTile_title,
+.ProjectRow_title {
+  font-size: 19px;
+  font-weight: 500;
+}
+.EditorDisplay_display {
+  font-size: 16.5px;
+}
+.Tag_tag {
+  font-weight: 400;
+}
+.CommentBody_comment {
+  border: none;
+}
+.Footer_logo {
+  filter: sepia(1);
+}

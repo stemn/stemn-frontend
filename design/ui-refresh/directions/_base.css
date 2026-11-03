@@ -1,0 +1,1131 @@
+/*
+ * What every direction shares: the app's components restated in design tokens, by component id (see catalog.mjs).
+ * A direction sets the tokens in its :root and adds what tokens cannot say after its own @rules marker.
+ * Selectors like .Button_button match the CSS-module class of that prefix (lib.mjs).
+ * This is a prototype layer over the existing CSS, not the proposed implementation: see ../README.md.
+ */
+html {
+  --card-border-width: 1px;
+  --card-shadow: none;
+  --icon-filter: none;
+  --logo-filter: none;
+  --nav-h: 56px;
+  --nav-text: var(--text);
+  --nav-field-bg: var(--surface-2);
+  --nav-field-border: transparent;
+  --nav-icon: var(--text-3);
+  --label-transform: none;
+  --label-tracking: 0;
+  --label-size: 12px;
+  --label-weight: 500;
+  --label-color: var(--text-3);
+  --label-font: var(--font);
+  --title-size: 22px;
+  --title-weight: 600;
+  --title-tracking: -0.02em;
+  --meta-font: var(--font);
+  --row-h: 44px;
+  --viewer-bg: linear-gradient(#f7f8fa, #e9ebef);
+  --code-bg: var(--surface-2);
+  --pop-border: var(--border);
+  --landing-text: var(--text);
+  --landing-logo-filter: invert(1);
+}
+/* @rules */
+
+/* Foundations */
+body {
+  background: var(--bg);
+  color: var(--text-2);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'cv11', 'ss01';
+}
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+.Container_root {
+  max-width: var(--page-width);
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.text-title-1,
+.text-title-2,
+.text-title-3,
+.text-title-4,
+.text-title-5,
+h1,
+h2,
+h3 {
+  color: var(--text);
+}
+.text-title-1,
+.text-title-2,
+.text-title-3,
+.text-title-4 {
+  font-family: var(--font-display);
+  font-weight: var(--title-weight);
+  letter-spacing: var(--title-tracking);
+}
+.text-title-5 {
+  font-weight: 400;
+  color: var(--text-2);
+}
+.text-subtitle-1 {
+  font-weight: 400;
+  color: var(--text-2);
+}
+.text-primary,
+.link-primary {
+  color: var(--link);
+}
+.link-primary:hover {
+  color: var(--accent-hover);
+}
+.text-grey-1,
+.text-grey-2,
+.text-grey-3,
+.text-description-1,
+.link-grey {
+  color: var(--text-3);
+}
+.text-mini-caps {
+  font-family: var(--label-font);
+  text-transform: var(--label-transform);
+  letter-spacing: var(--label-tracking);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  color: var(--label-color);
+  opacity: 1;
+}
+::placeholder {
+  color: var(--text-3);
+}
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* Every surface that used to be a white box with a 1px border */
+.styles_root,
+.ProjectOverview_files,
+.ProjectOverview_infoBoxes,
+.Readme_readme,
+.ProjectThreads_threadsPanel,
+.ProjectThreads_panel,
+.ProjectThread_panel,
+.NavPillContainer_root,
+.Comment_commentBody,
+.CommentNew_commentBody,
+.NotificationItem_notification,
+.FeaturedTile_tile,
+.FeaturedTile_rowTile,
+.User_userPanel,
+.ProjectTeam_userPanel,
+.UserOverview_panel,
+.ProjectCommits_graphPanel,
+.ProjectNewModal_panel {
+  background: var(--surface);
+  border: var(--card-border-width) solid var(--border);
+  border-radius: var(--radius-l);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+.ProjectOverview_image {
+  border: var(--card-border-width) solid var(--border);
+  border-radius: var(--radius-l);
+  box-shadow: var(--card-shadow);
+}
+
+/* Icon buttons and breadcrumbs, everywhere */
+.SimpleIconButton_button {
+  color: var(--text-3);
+}
+.SimpleIconButton_button:hover {
+  color: var(--text);
+}
+.FileBreadCrumbs_crumbs {
+  color: var(--text-2);
+}
+.FileBreadCrumbs_crumbs a {
+  color: var(--link);
+}
+
+/* C01 Navigation */
+.Header_header {
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-border);
+  color: var(--nav-text);
+}
+.Header_inner {
+  height: var(--nav-h);
+}
+.Header_logo {
+  height: calc(var(--nav-h) - 18px);
+  margin-left: 0;
+}
+.Header_logo img {
+  filter: var(--logo-filter);
+}
+.BetaBadge_badge {
+  display: none;
+}
+.Header_search {
+  width: 300px;
+}
+.SiteSearch_search {
+  background: var(--nav-field-bg);
+  border: 1px solid var(--nav-field-border);
+  border-radius: var(--radius-m);
+  height: var(--control-h);
+  margin-left: 14px;
+}
+.SiteSearch_search input {
+  background: transparent;
+  color: var(--nav-text);
+  font-size: 13px;
+  padding: 5px 10px;
+}
+.SiteSearch_icon {
+  color: var(--nav-icon);
+}
+.Header_links {
+  margin-left: 14px;
+}
+.Header_link {
+  color: var(--nav-text);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+  font-weight: 500;
+  border-bottom: none;
+  padding: 6px 10px;
+  margin: 0;
+  border-radius: var(--radius-s);
+}
+.Header_link.active {
+  background: var(--nav-active);
+  border-bottom: none;
+}
+.Header_badge {
+  background: var(--accent);
+  color: var(--accent-text);
+  min-width: 15px;
+  height: 15px;
+  font-size: 9px;
+}
+.Header_header .SimpleIconButton_button,
+.Header_header button {
+  color: var(--nav-icon);
+}
+.UserAvatar_contain,
+.UserAvatar_cover {
+  border-radius: var(--avatar-radius) !important;
+  background-color: var(--surface-2);
+}
+
+/* C02, C03 Page title bar and project header */
+.SubHeader_header {
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
+}
+.SubHeader_title {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: var(--title-size);
+  font-weight: var(--title-weight);
+  letter-spacing: var(--title-tracking);
+  padding: 14px 0;
+}
+.Tabs_tabs {
+  align-self: stretch;
+}
+.Tabs_tabs::after {
+  border-bottom-color: var(--border);
+}
+.Tabs_inner > a {
+  color: var(--text-3);
+  font-weight: 500;
+}
+.Tabs_inner > a:hover,
+.Tabs_inner > a.active {
+  color: var(--tab-active);
+}
+.Tabs_inner > a::after {
+  border-bottom-color: var(--tab-active);
+}
+.SubSubHeader_header {
+  background: var(--header-bg);
+  border-bottom-color: var(--header-border);
+}
+.SubSubHeader_headerBorder {
+  border-top-color: var(--header-border);
+}
+.ProjectOverview_blurb {
+  color: var(--text-2);
+}
+
+/* C05 Buttons and filter toolbar */
+.Button_button {
+  border-radius: var(--radius-m);
+  font-weight: 500;
+  font-size: 13px;
+  min-height: var(--control-h);
+  padding: 0 14px;
+  border: 1px solid transparent;
+  color: var(--text-2);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+.Button_button:hover {
+  background: var(--surface-2);
+}
+.Button_button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+.Button_button.primary:hover {
+  background: var(--accent-hover);
+}
+.Button_button.light,
+.Button_button.input {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text-2);
+}
+.Button_button.light:hover,
+.Button_button.input:hover {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+}
+.Button_button.warn {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+.Button_button.secondary {
+  background: var(--text);
+  color: var(--surface);
+}
+.Button_button.linkedin,
+.Button_button.facebook {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text-2);
+}
+.Button_button.lg {
+  min-height: calc(var(--control-h) + 6px);
+  padding: 0 18px;
+  font-size: 14px;
+}
+.Button_button.sm {
+  min-height: calc(var(--control-h) - 4px);
+  padding: 0 10px;
+}
+.Button_button.xs {
+  min-height: 24px;
+  padding: 0 8px;
+  font-size: 11px;
+}
+.SearchInput_search {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-m);
+  height: var(--control-h);
+}
+.SearchInput_search input {
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  padding: 5px 10px;
+}
+.SearchInput_icon {
+  color: var(--text-3);
+}
+
+.ProgressButton_progressButton {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-m);
+  color: var(--accent-text);
+  font-size: 13px;
+  font-weight: 500;
+  min-height: var(--control-h);
+  padding: 0 16px;
+}
+.ProgressButton_progressButton:hover {
+  background: var(--accent-hover);
+}
+
+/* C06 Tags and social buttons, C16 field chips */
+.SocialButton_button {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-m);
+  color: var(--text-2);
+  min-height: var(--control-h);
+  font-weight: 500;
+}
+.SocialButton_count {
+  border-left-color: var(--border);
+  color: var(--text-3);
+  font-family: var(--meta-font);
+  font-size: 12px;
+}
+.Tag_tag {
+  border-radius: var(--tag-radius);
+  border-color: var(--tag-border);
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 12px;
+  font-weight: 500;
+}
+.Tag_tag.primary {
+  background: var(--tag-bg);
+  border-color: var(--tag-border);
+  color: var(--tag-text);
+}
+.Tag_tag.primary:hover,
+.Tag_tag:hover {
+  border-color: var(--border-strong);
+  background: var(--tag-bg);
+}
+.Tag_tagInner {
+  padding: 4px 10px;
+}
+.Label_label {
+  border-radius: var(--tag-radius);
+  padding: 3px 7px;
+}
+
+/* C07 Dropdown menu */
+.Popover-body {
+  background: var(--surface);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px var(--pop-border),
+    var(--shadow-pop);
+}
+.Popover-tipShape {
+  fill: var(--surface);
+  stroke: var(--pop-border);
+}
+.PopoverMenu {
+  background: var(--surface);
+  color: var(--text-2);
+  font-size: 13px;
+  padding: 4px;
+}
+.PopoverMenu a {
+  color: var(--text-2);
+  border-radius: var(--radius-s);
+  padding: 7px 10px;
+}
+.PopoverMenu a:hover,
+.PopoverMenu a.active {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.PopoverMenu .divider {
+  border-top-color: var(--border);
+  margin: 4px 0;
+}
+
+/* C08 Modal */
+.Modal_overlay {
+  background-color: var(--scrim);
+  backdrop-filter: blur(2px);
+}
+.Modal_modal {
+  background: var(--surface);
+  color: var(--text-2);
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px var(--pop-border),
+    var(--shadow-pop);
+}
+.Modal_modal .modal-title,
+.Modal_modal .modal-footer {
+  border-color: var(--border);
+}
+.ProjectNewModal_modalBody {
+  background: var(--surface-2);
+}
+.ProjectNewModal_modalTitle,
+.ProjectNewModal_modalFooter {
+  border-color: var(--border);
+}
+.ProjectNewModal_panel {
+  margin-bottom: 14px;
+}
+.ProjectNewModal_panel h3 {
+  font-family: var(--label-font);
+  text-transform: var(--label-transform);
+  letter-spacing: var(--label-tracking);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  color: var(--label-color);
+}
+.ProjectNewModal_panel p {
+  color: var(--text-2);
+}
+.ArrowTabs_tab {
+  color: var(--text-3);
+  font-family: var(--label-font);
+  text-transform: var(--label-transform);
+  letter-spacing: var(--label-tracking);
+  font-weight: 500;
+}
+.ArrowTabs_tab:hover,
+.ArrowTabs_tab.active {
+  color: var(--text);
+}
+.ArrowTabs_arrow {
+  color: var(--text-3);
+}
+
+/* C09 Toast */
+.Toasts-web_toastInner {
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow:
+    0 0 0 1px var(--pop-border),
+    var(--shadow-pop);
+  min-height: 48px;
+}
+.Toasts-web_error .Toasts-web_toastInner {
+  background: var(--surface);
+  color: var(--text);
+  border-left: 3px solid var(--danger);
+}
+.Toasts-web_error .Toasts-web_icon {
+  color: var(--danger);
+}
+
+/* C10 Form fields */
+.dr-input,
+.react-autosuggest__input {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-m);
+  color: var(--text);
+  height: calc(var(--control-h) + 2px);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+textarea.dr-input {
+  height: auto;
+}
+.Autosuggest_container input {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-m);
+  color: var(--text);
+}
+.MarkdownButton_button {
+  color: var(--text-3);
+}
+.MarkdownButton_button:hover {
+  color: var(--text);
+}
+.Radio_radio input + span {
+  background-color: var(--surface);
+  border-color: var(--border-strong);
+}
+.Radio_radio {
+  color: var(--text);
+}
+.dr-input:focus,
+.dr-input.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.TextDisplayBox_box {
+  border-color: var(--border-strong);
+  border-radius: var(--radius-m);
+  color: var(--text);
+}
+
+/* C11 Project info panel */
+.ProjectOverview_infoBoxes {
+  border: var(--card-border-width) solid var(--border);
+}
+.ProjectOverview_infoBoxes > div {
+  border-right: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+  font-size: 13px;
+  padding: 16px 18px;
+}
+.ProjectOverview_infoBoxes > div:last-child {
+  border-bottom: none;
+}
+.ProjectOverview_infoBoxes > div svg {
+  color: var(--text-3);
+  width: 18px;
+  height: 18px;
+}
+
+/* C12 File list. The list animates to a height computed from a fixed 48px row, which these rows are not. */
+.ProjectOverview_files .rel-box > div {
+  height: auto !important;
+}
+.FileList_breadcrumbs {
+  background: var(--table-head);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+}
+.FileRow_row {
+  height: var(--row-h);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  padding: 4px 12px;
+}
+.FileRow_row:hover {
+  background: var(--surface-2);
+}
+.FileRow_name,
+.FileRow_row a {
+  font-weight: 500;
+}
+.FileRow_commit a {
+  color: var(--text-3);
+  font-weight: 400;
+}
+.FileRow_date,
+.FileRow_size {
+  color: var(--text-3);
+  font-family: var(--meta-font);
+  font-size: 12px;
+}
+.FileRow_row img {
+  filter: var(--icon-filter);
+}
+.FileList_search {
+  height: calc(var(--control-h) - 4px);
+}
+
+/* C13 README and markdown */
+.Readme_readme {
+  padding: 28px 32px;
+}
+.EditorDisplay_display {
+  font-family: var(--font-reading);
+  color: var(--text-2);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.EditorDisplay_display h1,
+.EditorDisplay_display h2,
+.EditorDisplay_display h3,
+.EditorDisplay_display h4 {
+  font-family: var(--font-display);
+  color: var(--text);
+  letter-spacing: var(--title-tracking);
+  border-bottom-color: var(--border);
+  font-weight: var(--title-weight);
+}
+.EditorDisplay_display a {
+  color: var(--link);
+}
+.EditorDisplay_display strong {
+  color: var(--text);
+}
+.EditorDisplay_display table th,
+.EditorDisplay_display table td {
+  border-color: var(--border);
+  font-family: var(--font);
+  font-size: 13px;
+}
+.EditorDisplay_display table tr {
+  background: transparent;
+  border-color: var(--border);
+}
+.EditorDisplay_display table tr:nth-child(2n) {
+  background: var(--surface-2);
+}
+.EditorDisplay_display code {
+  background: var(--code-bg);
+  color: var(--text);
+  border-radius: var(--radius-s);
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+}
+.EditorDisplay_display pre {
+  background: var(--code-bg);
+  border-radius: var(--radius-m);
+}
+.EditorDisplay_mention {
+  color: var(--link);
+}
+
+/* C14 Featured tiles, C15 project rows */
+.FeaturedTile_title,
+.ProjectRow_title {
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+}
+.FeaturedTile_blurb,
+.ProjectRow_blurb {
+  color: var(--text-2);
+}
+/* Two whole lines, where the fixed height used to cut a third line in half */
+.ProjectRow_blurb {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  height: auto;
+  min-height: 2.9em;
+  line-height: 1.45;
+}
+.ProjectRow_project,
+.UserOverview_project {
+  height: auto;
+  min-height: 145px;
+}
+.UserOverview_project,
+.Explore_project,
+.SiteSearchResults_projectRow .SiteSearchResults_result {
+  background: var(--surface);
+  border: var(--card-border-width) solid var(--border);
+  border-radius: var(--radius-l);
+  box-shadow: var(--card-shadow);
+}
+.ProjectRow_meta {
+  color: var(--text-3);
+  font-family: var(--meta-font);
+}
+.ProjectRow_picture {
+  border-radius: var(--radius-m);
+}
+
+/* C17 My Projects panel, section titles */
+.styles_root h3,
+.ProjectThreads_panel h3 {
+  font-family: var(--label-font);
+  text-transform: var(--label-transform);
+  letter-spacing: var(--label-tracking);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  color: var(--label-color);
+}
+.MyProjectsPanel_row {
+  color: var(--text-2);
+}
+.MyProjectsPanel_row:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+.MyProjectsPanel_providerIcon {
+  color: var(--text-3);
+}
+.SectionTitle_section {
+  border-bottom-color: var(--border);
+}
+.SectionTitle_text {
+  border-bottom: none;
+  color: var(--label-color);
+  font-family: var(--label-font);
+  text-transform: var(--label-transform);
+  letter-spacing: var(--label-tracking);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+}
+
+/* C18 Activity feed */
+.TimelineVertical_groupTitle {
+  color: var(--label-color);
+}
+.TimelineItem_item,
+.TimelineItem_group {
+  color: var(--text-3);
+}
+.TimelineItem_item b,
+.TimelineItem_item strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.TimelineItem_item a {
+  color: var(--link);
+}
+.TimelineItem_item a:hover {
+  color: var(--accent-hover);
+}
+.TimelineWrapper_item {
+  border-left-color: var(--border);
+}
+.TimelineWrapper_marker {
+  border-color: var(--border-strong);
+  background: var(--surface);
+  width: 9px;
+  min-width: 9px;
+  height: 9px;
+  margin-left: -5px;
+}
+.TimelineItem_startMarker,
+.TimelineItem_endMarker {
+  border-color: var(--border);
+}
+.CommentBody_comment {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+}
+
+/* C19 Thread filter sidebar, C33 settings navigation */
+.ProjectThreads_panel a,
+.ProjectThreads_panel {
+  color: var(--text-2);
+}
+.NavPill_button {
+  color: var(--text-2);
+  border-bottom-color: var(--border);
+  font-weight: 500;
+}
+.NavPill_button:hover {
+  background: var(--surface-2);
+}
+.NavPill_button.active {
+  color: var(--tab-active);
+  background: var(--surface-2);
+}
+.NavPill_button.active::after {
+  background: var(--tab-active);
+}
+
+/* C20 Thread rows */
+.ProjectThreads_thread {
+  border-bottom-color: var(--border);
+  padding: 14px 18px;
+}
+.ThreadRow_title {
+  color: var(--text);
+  font-weight: 500;
+}
+.ThreadRow_threadNumber {
+  color: var(--text-3);
+  font-family: var(--meta-font);
+  font-size: 12px;
+}
+.ThreadRow_meta {
+  color: var(--text-3);
+}
+.Pagination_button,
+.Pagination_indicator {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  color: var(--text-3);
+}
+
+/* C21 Thread header, C23 side panels */
+.ProjectThread_title {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: var(--title-weight);
+  letter-spacing: var(--title-tracking);
+}
+.ProjectThread_number {
+  color: var(--text-3);
+  font-family: var(--meta-font);
+  font-weight: 400;
+}
+.ProjectThread_meta,
+.ProjectThread_blurb {
+  color: var(--text-2);
+}
+.Crumb_crumb,
+.Crumb_slash {
+  color: var(--text-3);
+}
+
+/* C22 Comments, C24 composer */
+.Comment_commentBody,
+.CommentNew_commentBody {
+  color: var(--text-2);
+}
+.Comment_comment + .Comment_comment::before {
+  border-left-color: var(--border);
+}
+.Comment_date {
+  color: var(--text-3);
+  font-family: var(--meta-font);
+  font-size: 12px;
+}
+.Comment_commentHeader,
+.CommentNew_commentHeader {
+  padding: 14px 18px 8px;
+  color: var(--text);
+}
+.Comment_commentContent,
+.CommentNew_commentContent {
+  margin: 0 18px 16px;
+}
+.CommentNew_commentNew .CommentNew_commentBody:hover {
+  border-color: var(--border-strong);
+}
+
+/* C25 Notification rows */
+.NotificationItem_notification {
+  padding: 12px 16px;
+  margin-bottom: 8px;
+}
+.NotificationItem_text {
+  color: var(--text-2);
+}
+.NotificationItem_text a {
+  color: var(--text);
+  font-weight: 500;
+}
+.NotificationItem_meta {
+  color: var(--text-3);
+  font-family: var(--meta-font);
+}
+.NotificationItem_mark {
+  color: var(--text-3);
+}
+
+/* C26 History graph, C35 heatmap */
+.ProjectCommits_graphPanel .recharts-cartesian-grid line {
+  stroke: var(--border);
+}
+.ProjectCommits_graphPanel .recharts-text,
+.recharts-text {
+  fill: var(--text-3);
+  font-size: 11px;
+}
+.recharts-cartesian-axis-line,
+.recharts-cartesian-axis-tick-line {
+  stroke: var(--border-strong);
+}
+.recharts-area-area {
+  fill: var(--accent);
+  fill-opacity: 0.22;
+}
+.recharts-area-curve {
+  stroke: var(--accent);
+}
+.react-calendar-heatmap text {
+  fill: var(--text-3);
+}
+.react-calendar-heatmap rect[class*='color-empty'],
+.react-calendar-heatmap rect {
+  rx: var(--heat-radius);
+}
+
+/* C27-C30 CAD workspace */
+.File_header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  height: var(--nav-h);
+  min-height: var(--nav-h);
+  color: var(--text-2);
+}
+.File_header a,
+.FileBreadCrumbs_crumbs a,
+.Crumb_crumb a {
+  color: var(--link);
+}
+.FileEditButton_editButton {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+.File_preview,
+.FileCompareInner_preview1,
+.FileCompareInner_preview2,
+.FileCompareInner_single {
+  background: var(--surface);
+}
+.File_sidebar {
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  color: var(--text-2);
+  padding: 24px;
+}
+.File_sidebarTitle {
+  color: var(--label-color);
+}
+.File_timeline {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+.SimpleTable_table td,
+.SimpleTable_shared td {
+  color: var(--text-2);
+}
+.SimpleTable_table td:first-child {
+  color: var(--text-3);
+}
+.Timeline_timeline {
+  background: var(--surface);
+  border-bottom-color: var(--border);
+}
+.Timeline_line {
+  background: var(--border-strong);
+}
+.TimelineInner_dot {
+  background: var(--surface);
+  border-color: var(--border-strong);
+}
+.TimelineInner_dot.TimelineInner_active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.PreviewCadOss_toolbar,
+.FileDiffView_toolbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+  padding: 8px 12px;
+  gap: 8px;
+}
+.PreviewCadOss_tool,
+.FileDiffView_tool {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-s);
+  color: var(--text-2);
+  font-family: inherit;
+  font-weight: 500;
+  height: 28px;
+  padding: 0 10px;
+}
+.PreviewCadOss_tool:hover,
+.FileDiffView_tool:hover {
+  background: var(--surface-2);
+}
+.PreviewCadOss_tool[aria-pressed='true'],
+.FileDiffView_tool[aria-pressed='true'] {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--tab-active);
+}
+.FileDiffView_count {
+  font-family: var(--meta-font);
+}
+.PreviewCadOss_canvas,
+.FileDiffView_canvas {
+  background: var(--viewer-bg);
+}
+.PreviewCadOss_status {
+  color: var(--text-3);
+  font-family: var(--meta-font);
+  opacity: 1;
+}
+.PreviewCadOss_parts,
+.FileDiffView_panel {
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  color: var(--text-2);
+}
+.PreviewCadOss_partsTitle,
+.FileDiffView_panelTitle {
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.PreviewCadOss_part,
+.FileDiffView_row {
+  color: var(--text-2);
+}
+.PreviewCadOss_part:hover,
+.FileDiffView_row:hover {
+  background: var(--surface-2);
+}
+.FileDiffView_slider,
+.FileDiffView_check {
+  color: var(--text-2);
+}
+.FileDiffView_slider input,
+.FileDiffView_check input {
+  accent-color: var(--accent);
+}
+
+/* C34 User profile, C35 panels */
+.User_userPanel {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.User_avatar {
+  border-radius: var(--radius-l) var(--radius-l) 0 0 !important;
+  background-size: cover;
+}
+.User_name {
+  color: var(--text);
+  font-family: var(--font-display);
+}
+.User_blurb,
+.User_iconInfo {
+  color: var(--text-2);
+}
+.User_userPanel hr {
+  border-color: var(--border);
+}
+
+/* C36 Sign-in card */
+.Login_background {
+  background-image: var(--login-bg);
+}
+.Login_panel {
+  background: var(--surface);
+  color: var(--text-2);
+  border-radius: var(--radius-l);
+  box-shadow: var(--login-shadow);
+}
+.Login_textDivider::before,
+.Login_textDivider::after {
+  border-top-color: var(--border);
+}
+
+.LandingHeader_logo img {
+  filter: var(--landing-logo-filter);
+}
+.LandingHeader_link {
+  color: var(--landing-text);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+.LandingFooter_footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  color: var(--text-3);
+}
+.LandingFooter_footer a {
+  color: var(--text-3);
+}
+.LandingFooter_title {
+  color: var(--text);
+  font-weight: 600;
+}
+.LandingFooter_logo {
+  filter: var(--logo-filter);
+}
+
+/* C04 Footer */
+.Footer_footer {
+  background: transparent;
+  border-top: 1px solid var(--border);
+}
+.Footer_footer a {
+  color: var(--text-3);
+}
+.Footer_footer a:hover {
+  color: var(--text);
+}
+.Footer_logo {
+  filter: var(--logo-filter);
+}
