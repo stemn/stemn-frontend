@@ -29,6 +29,8 @@ export default tseslint.config(
       '**/test-results/**',
       '**/playwright-report/**',
       '**/coverage/**',
+      // The UI direction review: standalone tooling and a static page, not part of any app
+      'design/**',
       // Vendored third-party code
       'stemn-frontend-website/public/static/**',
       'stemn-frontend-shared/src/misc/Websocket/primus-websockets2.js',

@@ -1,0 +1,217 @@
+/* C, Blueprint: square, ruled, monospaced metadata, a title-block feel. For people who read drawings. */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=block');
+:root {
+  --font: 'IBM Plex Sans', sans-serif;
+  --font-display: 'IBM Plex Sans', sans-serif;
+  --font-reading: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --meta-font: 'IBM Plex Mono', monospace;
+  --bg: #f6f7f4;
+  --surface: #ffffff;
+  --surface-2: #f1f3ee;
+  --border: #dcdfd8;
+  --border-strong: #c6cbc2;
+  --text: #1b2a33;
+  --text-2: #3b4a52;
+  --text-3: #6f7c80;
+  --accent: #e8590c;
+  --accent-hover: #cc4d09;
+  --accent-text: #ffffff;
+  --accent-soft: rgba(232, 89, 12, 0.14);
+  --link: #0b6e99;
+  --danger: #c92a2a;
+  --tab-active: #e8590c;
+  --nav-bg: #1b2a33;
+  --nav-border: #1b2a33;
+  --nav-text: #e7ecec;
+  --nav-active: rgba(255, 255, 255, 0.12);
+  --nav-field-bg: rgba(255, 255, 255, 0.08);
+  --nav-field-border: rgba(255, 255, 255, 0.14);
+  --nav-icon: #a9b6b8;
+  --nav-h: 48px;
+  --logo-filter: invert(1) brightness(1.4);
+  --header-bg: #ffffff;
+  --header-border: #c6cbc2;
+  --table-head: #f1f3ee;
+  --tag-bg: transparent;
+  --tag-border: #c6cbc2;
+  --tag-text: #3b4a52;
+  --tag-radius: 2px;
+  --radius-s: 2px;
+  --radius-m: 2px;
+  --radius-l: 3px;
+  --avatar-radius: 2px;
+  --heat-radius: 0;
+  --control-h: 30px;
+  --page-width: 1220px;
+  --scrim: rgba(27, 42, 51, 0.45);
+  --shadow-pop: 0 10px 24px -8px rgba(27, 42, 51, 0.3);
+  --login-bg: linear-gradient(#1b2a33, #1b2a33);
+  --login-shadow: 0 0 0 1px #000;
+  --label-transform: uppercase;
+  --label-tracking: 0.08em;
+  --label-size: 11px;
+  --label-weight: 500;
+  --label-font: 'IBM Plex Mono', monospace;
+  --label-color: #6f7c80;
+  --title-size: 19px;
+  --title-tracking: -0.01em;
+  --row-h: 34px;
+  --landing-text: #e7ecec;
+  --landing-logo-filter: none;
+  --viewer-bg:
+    linear-gradient(rgba(27, 42, 51, 0.05) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(27, 42, 51, 0.05) 1px, transparent 1px) 0 0 / 24px 24px, #f6f7f4;
+}
+/* @rules */
+body {
+  background-image:
+    linear-gradient(rgba(27, 42, 51, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 42, 51, 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+  font-size: 13px;
+}
+.Login_background {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-color: #1b2a33;
+}
+.Button_button {
+  text-transform: none;
+  font-weight: 500;
+}
+.Button_button.primary {
+  font-weight: 600;
+}
+/* Tabs are ruled drawing-sheet tabs, the active one capped in the accent */
+.Tabs_inner > a {
+  padding: 8px 14px;
+  margin-right: 0;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: #3b4a52;
+}
+.Tabs_inner > a.active {
+  color: #1b2a33;
+  background: #f6f7f4;
+  border-left-color: #c6cbc2;
+  border-right-color: #c6cbc2;
+  box-shadow: inset 0 2px 0 #e8590c;
+}
+.Tabs_inner > a::after {
+  display: none;
+}
+.Tag_tag,
+.Label_label,
+.TimelineVertical_groupTitle {
+  font-family: 'IBM Plex Mono', monospace;
+}
+.Tag_tag {
+  font-size: 11px;
+  font-weight: 400;
+}
+.Tag_tagInner {
+  padding: 3px 8px;
+}
+/* File list reads as a schedule: ruled columns, mono metadata, zebra rows */
+.FileRow_row {
+  font-size: 12.5px;
+}
+.FileRow_row:nth-child(odd) {
+  background: #fafbf8;
+}
+.FileRow_date,
+.FileRow_size,
+.FileRow_label {
+  border-left: 1px solid #e6e8e3;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-left: 10px;
+  margin-left: 0;
+}
+.FileRow_label {
+  width: auto;
+  min-width: 96px;
+  white-space: nowrap;
+}
+.FileRow_size {
+  width: 76px;
+  white-space: nowrap;
+}
+.FileRow_row a {
+  font-weight: 400;
+}
+.Label_label {
+  color: #3b4a52;
+  border-color: #c6cbc2;
+  text-transform: none;
+}
+.ProjectOverview_infoBoxes > div {
+  padding: 11px 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+}
+.Comment_commentHeader {
+  background: #f1f3ee;
+  border-bottom: 1px solid #dcdfd8;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+}
+.Comment_commentContent {
+  margin: 0 14px 12px;
+}
+.CommentBody_comment {
+  border-left: 2px solid #c6cbc2;
+  background: transparent;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 0;
+  padding: 2px 12px;
+}
+.FeaturedTile_tile:hover,
+.FeaturedTile_rowTile:hover {
+  transform: none;
+  border-color: #e8590c;
+}
+.SiteSearch_search input::placeholder {
+  color: #a9b6b8;
+}
+.File_header {
+  background: #1b2a33;
+  color: #e7ecec;
+  height: 48px;
+  min-height: 48px;
+}
+.File_header a {
+  color: #fff;
+}
+.File_header .FileBreadCrumbs_crumbs,
+.File_header .SimpleIconButton_button {
+  color: #a9b6b8;
+}
+.LandingFooter_logo {
+  filter: none;
+}
+.PreviewCadOss_toolbar,
+.FileDiffView_toolbar {
+  background: #f1f3ee;
+}
+.PreviewCadOss_tool,
+.FileDiffView_tool {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+}
+.PreviewCadOss_tool[aria-pressed='true'],
+.FileDiffView_tool[aria-pressed='true'] {
+  color: #a93f07;
+}
+.Footer_logo {
+  filter: none;
+}

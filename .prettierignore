@@ -20,3 +20,7 @@ stemn-frontend-shared/src/assets/css/codemirror.css
 
 # Prose: not reformatted
 *.md
+
+# Generated review gallery data (design/ui-refresh)
+design/ui-refresh/gallery/manifest.js
+design/ui-refresh/gallery/sheets

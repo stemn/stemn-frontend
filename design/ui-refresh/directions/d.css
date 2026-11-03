@@ -1,0 +1,80 @@
+/* D, Graphite: dark surfaces, quiet borders, an azure accent. Models and diffs do the talking. */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=block');
+:root {
+  color-scheme: dark;
+  --font: 'Geist', sans-serif;
+  --font-display: 'Geist', sans-serif;
+  --font-reading: 'Geist', sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+  --meta-font: 'Geist Mono', monospace;
+  --bg: #0e0f12;
+  --surface: #16181c;
+  --surface-2: #1e2126;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text: #eceef1;
+  --text-2: #b5bac2;
+  --text-3: #7c828c;
+  --accent: #3d8bfd;
+  --accent-hover: #5b9dfd;
+  --accent-text: #ffffff;
+  --accent-soft: rgba(61, 139, 253, 0.2);
+  --link: #6ba8ff;
+  --danger: #f2555a;
+  --tab-active: #eceef1;
+  --nav-bg: #0e0f12;
+  --nav-border: rgba(255, 255, 255, 0.08);
+  --nav-active: rgba(255, 255, 255, 0.08);
+  --nav-field-bg: #1e2126;
+  --nav-icon: #8e949e;
+  --logo-filter: invert(1);
+  --icon-filter: invert(0.85);
+  --header-bg: #0e0f12;
+  --header-border: rgba(255, 255, 255, 0.08);
+  --table-head: #1a1c20;
+  --tag-bg: rgba(255, 255, 255, 0.06);
+  --tag-border: transparent;
+  --tag-text: #c5cad2;
+  --tag-radius: 6px;
+  --radius-s: 5px;
+  --radius-m: 7px;
+  --radius-l: 10px;
+  --avatar-radius: 6px;
+  --heat-radius: 2px;
+  --control-h: 32px;
+  --page-width: 1140px;
+  --scrim: rgba(0, 0, 0, 0.6);
+  --shadow-pop: 0 18px 48px -8px rgba(0, 0, 0, 0.7);
+  --login-bg:
+    radial-gradient(900px 500px at 50% -10%, rgba(61, 139, 253, 0.2), transparent), linear-gradient(#0e0f12, #0e0f12);
+  --login-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 32px 72px -16px rgba(0, 0, 0, 0.8);
+  --viewer-bg: radial-gradient(circle at 50% 35%, #2a2e35, #14161a 75%);
+  --code-bg: #24272d;
+  --pop-border: rgba(255, 255, 255, 0.1);
+  --row-h: 40px;
+  --landing-text: #eceef1;
+  --landing-logo-filter: none;
+}
+/* @rules */
+.Tabs_inner > a::after {
+  border-bottom-color: #3d8bfd;
+}
+.Button_button.light:hover,
+.Button_button.input:hover,
+.PreviewCadOss_tool:hover,
+.FileDiffView_tool:hover {
+  background: #262a30;
+}
+.FileRow_commit a,
+.NotificationItem_text a {
+  color: #b5bac2;
+}
+.EditorDisplay_display table tr:nth-child(2n) {
+  background: rgba(255, 255, 255, 0.02);
+}
+.CommentBody_comment {
+  background: #1b1d22;
+}
+.Footer_logo {
+  filter: invert(1);
+}

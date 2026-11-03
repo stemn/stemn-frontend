@@ -1,0 +1,71 @@
+/* A, Hairline: monochrome, white canvas, 1px lines. Colour is reserved for status and focus. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block');
+:root {
+  --font: 'Inter', sans-serif;
+  --font-display: 'Inter', sans-serif;
+  --font-reading: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --meta-font: 'Inter', sans-serif;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f7f7f8;
+  --border: #ececee;
+  --border-strong: #e0e0e4;
+  --text: #18181b;
+  --text-2: #3f3f46;
+  --text-3: #80808a;
+  --accent: #18181b;
+  --accent-hover: #3f3f46;
+  --accent-text: #ffffff;
+  --accent-soft: rgba(37, 99, 235, 0.14);
+  --link: #18181b;
+  --danger: #dc2626;
+  --tab-active: #18181b;
+  --nav-bg: #ffffff;
+  --nav-border: #ececee;
+  --nav-active: #f4f4f5;
+  --header-bg: #ffffff;
+  --header-border: #ececee;
+  --table-head: #fafafa;
+  --tag-bg: #f4f4f5;
+  --tag-border: transparent;
+  --tag-text: #3f3f46;
+  --tag-radius: 999px;
+  --radius-s: 5px;
+  --radius-m: 7px;
+  --radius-l: 10px;
+  --avatar-radius: 50%;
+  --heat-radius: 2px;
+  --control-h: 32px;
+  --page-width: 1100px;
+  --scrim: rgba(24, 24, 27, 0.25);
+  --shadow-pop: 0 12px 32px -8px rgba(24, 24, 27, 0.16);
+  --login-bg: linear-gradient(#ffffff, #ffffff);
+  --login-shadow: 0 0 0 1px #ececee, 0 24px 64px -24px rgba(24, 24, 27, 0.18);
+  --row-h: 42px;
+}
+/* @rules */
+.Tabs_inner > a:not(.active) {
+  color: #80808a;
+}
+.TimelineItem_item a,
+.NotificationItem_text a,
+.FileRow_row a {
+  text-decoration-line: underline;
+  text-decoration-color: #e0e0e4;
+  text-underline-offset: 3px;
+}
+.FileRow_row a {
+  text-decoration-line: none;
+}
+.FeaturedTile_tile,
+.FeaturedTile_rowTile {
+  box-shadow: none;
+}
+.FeaturedTile_tile:hover,
+.FeaturedTile_rowTile:hover {
+  border-color: #c7c7cc;
+}
+.Toasts-web_error .Toasts-web_toastInner {
+  border-left-width: 1px;
+}

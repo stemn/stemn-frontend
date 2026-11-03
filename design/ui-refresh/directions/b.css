@@ -1,0 +1,140 @@
+/* B, Soft Studio: borderless cards with soft depth on a cool canvas, a floating nav, segmented tabs. */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=block');
+:root {
+  --font: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-reading: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --bg: #f4f5fa;
+  --surface: #ffffff;
+  --surface-2: #f4f5fa;
+  --border: #eceef5;
+  --border-strong: #e2e4ee;
+  --text: #1e2030;
+  --text-2: #484b63;
+  --text-3: #8a8da3;
+  --accent: #5b5bd6;
+  --accent-hover: #4c4cc4;
+  --accent-text: #ffffff;
+  --accent-soft: rgba(91, 91, 214, 0.14);
+  --link: #5b5bd6;
+  --danger: #e5484d;
+  --tab-active: #5b5bd6;
+  --nav-bg: #ffffff;
+  --nav-border: transparent;
+  --nav-active: #f0f0fd;
+  --nav-field-bg: #f4f5fa;
+  --header-bg: transparent;
+  --header-border: transparent;
+  --table-head: #ffffff;
+  --tag-bg: #eeeefc;
+  --tag-border: transparent;
+  --tag-text: #4c4cc4;
+  --tag-radius: 999px;
+  --radius-s: 8px;
+  --radius-m: 10px;
+  --radius-l: 16px;
+  --avatar-radius: 50%;
+  --heat-radius: 3px;
+  --control-h: 36px;
+  --page-width: 1140px;
+  --card-border-width: 0px;
+  --card-shadow: 0 1px 2px rgba(30, 32, 48, 0.04), 0 8px 24px -12px rgba(30, 32, 48, 0.12);
+  --scrim: rgba(30, 32, 48, 0.35);
+  --shadow-pop: 0 20px 48px -12px rgba(30, 32, 48, 0.24);
+  --login-bg: linear-gradient(135deg, #e8e7fb, #f4f5fa 55%, #e4eefa);
+  --login-shadow: 0 2px 4px rgba(30, 32, 48, 0.04), 0 32px 72px -24px rgba(30, 32, 48, 0.26);
+  --title-size: 26px;
+  --title-weight: 700;
+  --label-size: 13px;
+  --label-weight: 600;
+  --label-color: #484b63;
+  --row-h: 48px;
+}
+/* @rules */
+body {
+  word-spacing: 0.05em;
+}
+.Header_header {
+  background: transparent;
+  border-bottom: none;
+  padding: 12px 24px 0;
+}
+.Header_inner {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow:
+    0 1px 2px rgba(30, 32, 48, 0.04),
+    0 8px 24px -12px rgba(30, 32, 48, 0.14);
+  max-width: 1092px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.Button_button.primary {
+  box-shadow:
+    0 1px 2px rgba(76, 76, 196, 0.3),
+    0 6px 14px -6px rgba(76, 76, 196, 0.5);
+}
+.Button_button.light,
+.Button_button.input,
+.SocialButton_button,
+.SearchInput_search {
+  border-color: transparent;
+  box-shadow: 0 0 0 1px #e2e4ee;
+}
+.SubHeader_title {
+  padding: 22px 0 14px;
+}
+/* Tabs become a segmented control in a tinted track */
+.Tabs_tabs {
+  align-self: center;
+  height: 38px;
+  background: #e9eaf3;
+  border-radius: 12px;
+  min-height: 38px;
+  padding: 3px;
+  overflow: hidden;
+}
+.Tabs_tabs::after {
+  display: none;
+}
+.Tabs_inner {
+  margin-bottom: 0;
+  height: 32px;
+}
+.Tabs_inner > a {
+  min-height: 32px;
+  height: 32px;
+  padding: 0 14px;
+  margin-right: 2px;
+  border-radius: 9px;
+  color: #484b63;
+}
+.Tabs_inner > a::after {
+  display: none;
+}
+.Tabs_inner > a.active {
+  background: #fff;
+  color: #1e2030;
+  box-shadow: 0 1px 3px rgba(30, 32, 48, 0.14);
+}
+.SubSubHeader_header {
+  padding-top: 8px;
+}
+.FeaturedTile_tile:hover,
+.FeaturedTile_rowTile:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 2px 4px rgba(30, 32, 48, 0.05),
+    0 18px 36px -16px rgba(30, 32, 48, 0.24);
+}
+.ProjectOverview_infoBoxes > div {
+  border-bottom-color: #f2f3f8;
+}
+.CommentBody_comment {
+  border: none;
+}
+.Comment_comment + .Comment_comment::before {
+  height: 10px;
+  border-left: none;
+}
